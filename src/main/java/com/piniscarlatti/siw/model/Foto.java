@@ -3,10 +3,7 @@ package com.piniscarlatti.siw.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -17,5 +14,6 @@ public class Foto {
     private Long _id;
     private String nome;
     private String categoria;
+    @OneToOne
     private Fotografo fotografo;
 }

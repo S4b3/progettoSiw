@@ -3,10 +3,7 @@ package com.piniscarlatti.siw.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -18,7 +15,10 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long _id;
     private String nome;
+    @OneToMany
+    @JoinColumn(name = "album_id")
     private List<Foto> fotografie;
+    @ManyToOne
     private Fotografo fotografo;
     
     @Override
