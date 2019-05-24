@@ -20,5 +20,11 @@ public class Album {
     private String nome;
     private List<Foto> fotografie;
     private Fotografo fotografo;
-
+    
+    @Override
+    public boolean equals(Object o){
+        Album that = (Album) o;
+        if(this.nome.equals(that.getNome()) && this.fotografo.equals(that.getFotografo())) { return true; }
+        return  false;
+    }
 }
