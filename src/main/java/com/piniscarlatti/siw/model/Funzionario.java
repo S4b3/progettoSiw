@@ -20,18 +20,12 @@ public class Funzionario {
     private String cognome;
 
     protected Funzionario(){ }
-<<<<<<< HEAD
+
     
-    public Funzionario(String username, String cognome){
-        this.nome=username;
-        this.cognome=cognome;
-=======
+    public Funzionario(String nome, String cognome) {
+        this.nome = nome;
+        this.cognome = cognome;
 
-    public Funzionario(String username, String password){
-        this.username=username;
-        this.password=password;
->>>>>>> refs/remotes/origin/master
     }
-
 
 }
