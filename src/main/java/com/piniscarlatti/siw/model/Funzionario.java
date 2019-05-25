@@ -16,14 +16,14 @@ public class Funzionario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long _id;
-    private String username;
-    private String password;
+    private String nome;
+    private String cognome;
 
     protected Funzionario(){ }
-
-    private Funzionario(String username, String password){
-        this.username=username;
-        this.password=password;
+    
+    public Funzionario(String username, String cognome){
+        this.nome=username;
+        this.cognome=cognome;
     }
 
 

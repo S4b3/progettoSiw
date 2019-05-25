@@ -4,27 +4,28 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Data
 @EqualsAndHashCode
-public class Fotografo {
+public class Fotografo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
-    private String username;
-    private String password;
+    private String email;
+    private String nome;
+    private String cognome;
 
     @OneToMany(mappedBy = "fotografo")
     private Set<Album> album;
 
     protected Fotografo(){}
 
-    private Fotografo (String username, String password){
-        this.username=username;
-        this.password=password;
+    public Fotografo (String nome, String cognome,String email){
+        this.nome=nome;
+        this.cognome=cognome;
+        this.email = email;
     }
 
 

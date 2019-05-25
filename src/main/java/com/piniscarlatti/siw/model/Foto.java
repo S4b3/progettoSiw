@@ -19,7 +19,7 @@ public class Foto {
 
     protected Foto(){}
 
-    private Foto(String nome, String categoria){
+    public Foto(String nome, String categoria){
         this.nome=nome;
         this.categoria=categoria;
     }
