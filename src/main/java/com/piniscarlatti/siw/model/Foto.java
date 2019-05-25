@@ -16,4 +16,11 @@ public class Foto {
     private String categoria;
     @OneToOne
     private Fotografo fotografo;
+
+    protected Foto(){}
+
+    private Foto(String nome, String categoria){
+        this.nome=nome;
+        this.categoria=categoria;
+    }
 }

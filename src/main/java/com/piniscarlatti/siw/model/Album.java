@@ -20,6 +20,13 @@ public class Album {
     private List<Foto> fotografie;
     @ManyToOne
     private Fotografo fotografo;
+
+    protected Album(){}
+
+    private Album(String nome){
+
+        this.nome=nome;
+    }
     
     @Override
     public boolean equals(Object o){

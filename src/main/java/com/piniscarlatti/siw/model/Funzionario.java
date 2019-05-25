@@ -19,5 +19,12 @@ public class Funzionario {
     private String username;
     private String password;
 
+    protected Funzionario(){ }
+
+    private Funzionario(String username, String password){
+        this.username=username;
+        this.password=password;
+    }
+
 
 }
