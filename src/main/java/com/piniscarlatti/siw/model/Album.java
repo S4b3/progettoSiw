@@ -23,7 +23,7 @@ public class Album {
 
     protected Album(){}
 
-    private Album(String nome){
+    public Album(String nome){
 
         this.nome=nome;
     }

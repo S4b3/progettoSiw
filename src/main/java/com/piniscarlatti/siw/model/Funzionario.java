@@ -21,7 +21,7 @@ public class Funzionario {
 
     protected Funzionario(){ }
 
-    private Funzionario(String username, String password){
+    public Funzionario(String username, String password){
         this.username=username;
         this.password=password;
     }
