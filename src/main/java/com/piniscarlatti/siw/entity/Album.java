@@ -1,4 +1,4 @@
-package com.piniscarlatti.siw.model;
+package com.piniscarlatti.siw.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,6 +1,6 @@
 package com.piniscarlatti.siw.controller;
 
-import com.piniscarlatti.siw.model.Fotografo;
+import com.piniscarlatti.siw.entity.Fotografo;
 import com.piniscarlatti.siw.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
