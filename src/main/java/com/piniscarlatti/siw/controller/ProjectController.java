@@ -15,10 +15,12 @@ public class ProjectController {
     @Autowired
     FotografoRepository fotografoRepository;
 
+
     @GetMapping("/home")
     public String getHome(){
         fotografoRepository.save(new Fotografo("Sto", "cazzo", "alfa1@gmail.com"));
         return "home";
     }
+
 
 }
