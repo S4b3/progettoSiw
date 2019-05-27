@@ -15,12 +15,13 @@ public class Foto {
     private String nome;
     private String categoria;
     @OneToOne
-    private Fotografo fotografo;
+    private Album album;
 
     protected Foto(){}
 
-    public Foto(String nome, String categoria){
-        this.nome=nome;
-        this.categoria=categoria;
+    public Foto(String nome, String categoria,Album album){
+        this.nome = nome;
+        this.categoria = categoria;
+        this.album = album;
     }
 }
