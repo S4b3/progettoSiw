@@ -3,10 +3,7 @@ package com.piniscarlatti.siw.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -16,12 +13,17 @@ public class Funzionario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long _id;
+    @Column(unique = true, nullable = false)
+    private String username;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private String cognome;
 
-    protected Funzionario(){ }
+    protected Funzionario() {
+    }
 
-    
+
     public Funzionario(String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;

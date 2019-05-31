@@ -1,18 +1,18 @@
 package com.piniscarlatti.siw.controller;
 
-
+import com.piniscarlatti.siw.entity.Fotografo;
 import com.piniscarlatti.siw.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Controller
-@RequestMapping("/gallery")
-public class GalleryController implements WebMvcConfigurer {
 
+
+@Controller
+public class FotografoController implements WebMvcConfigurer {
 
     @Autowired
     FotografoRepository fotografoRepository;
@@ -22,21 +22,25 @@ public class GalleryController implements WebMvcConfigurer {
         registry.addViewController("/results").setViewName("results");
     }
 
-    @GetMapping
-    public String getGallery(){
-        return "gallery";
+    @GetMapping("/")
+    public String showForm(Fotografo fotografo) {
+        return "formFotografo";
     }
 
+    @PostMapping("/")
+    public String checkPersonInfo(Fotografo fotografo) {
 
-    @GetMapping("/albums")
-    public String getAlbumsGallery(){
-        return "galleryAlbums";
+
+        try {
+            fotografo.setAlbumBase();
+            fotografoRepository.save(fotografo);
+        } catch (Exception e) {
+
+            return "form";
+        }
+
+        return "redirect:/results";
     }
-
-    @GetMapping("/photos")
-    public String getPhotosGallery(){
-        return "galleryFoto";
-    }
-
 
 }
+
