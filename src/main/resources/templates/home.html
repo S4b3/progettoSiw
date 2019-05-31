@@ -6,6 +6,11 @@
     <h1>Zelda madre dei draghi <h1>
 </head>
 <body>
-
+    <p>
+        Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
+    </p>
+    <security:authorize access ="hasRole('ROLE_FUNZIONARIO')">
+        <h2>AO puoi legge solo se sei funzionario brother</h2>
+    </security:authorize>
 </body>
 </html>

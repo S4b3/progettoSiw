@@ -18,8 +18,12 @@ public class ProjectController {
 
     @GetMapping("/home")
     public String getHome(){
-        fotografoRepository.save(new Fotografo("Sto", "cazzo", "alfa1@gmail.com"));
         return "home";
+    }
+
+    @GetMapping("/login")
+    public String getLogin(){
+        return "login";
     }
 
 
