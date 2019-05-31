@@ -1,9 +1,13 @@
 package com.piniscarlatti.siw.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,10 +25,13 @@ public class Fotografo implements Serializable {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
+    @Size(min = 3, max = 30)
     private String nome;
     @Column(nullable = false)
+    @Size(min = 3, max = 30)
     private String cognome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fotografo", cascade = CascadeType.ALL)
     @MapKey(name ="_id")
     private Map<Long, Album> album;
