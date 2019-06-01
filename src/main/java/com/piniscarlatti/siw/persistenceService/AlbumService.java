@@ -24,7 +24,7 @@ public class AlbumService implements AlbumServiceInterface {
     @Override
     public void deleteAlbum(Album album) {
 
-        albumRepository.deleteById(album.get_id());
+        albumRepository.deleteById(album.getId());
 
     }
 
@@ -41,7 +41,7 @@ public class AlbumService implements AlbumServiceInterface {
         List<Album> albumDaEliminare = new ArrayList<>();
         List<Album> albums = albumRepository.findAll();
         albums.parallelStream()
-                .filter(i-> i.getFotografo().get_id()==fotografo.get_id())
+                .filter(i-> i.getFotografo().getId()==fotografo.getId())
                 .map(i-> albumDaEliminare.add(i));
 
     }

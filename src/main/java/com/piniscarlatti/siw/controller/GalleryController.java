@@ -54,11 +54,44 @@ public class GalleryController implements WebMvcConfigurer {
         }
 
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
-        model.addAttribute("alfa",fotografi);
+        model.addAttribute("fotografi",fotografi);
         return "results";
     }
 
-    //cancellazione di tutti i fotografi dal db
+    //Cancellazione singolo fotografo
+    @GetMapping("/photographers/delete/{id}")
+    public String deletePhotographers(@PathVariable("id") Long id, Model model){
+        Fotografo fotografo =fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+        fotografoRepository.delete(fotografo);
+        model.addAttribute("fotografi", fotografoRepository.findAll());
+        return "results";
+    }
+
+    //Modifica dati fotografo
+    @GetMapping("/photographers/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        Fotografo fotografo = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+
+        model.addAttribute("fotografo", fotografo);
+        return "modificaFotografo";
+    }
+
+    @PostMapping("/photographers/update/{id}")
+    public String updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo,
+                             BindingResult result, Model model) {
+        /*if (result.hasErrors()) {
+            fotografo.setId(id);
+            return "modificaFotografo";
+        }*/
+
+        fotografoRepository.save(fotografo);
+        model.addAttribute("fotografi", fotografoRepository.findAll());
+        return "results";
+    }
+
+    //Cancellazione di tutti i fotografi dal db
     @GetMapping("/deletephotographers")
     public String showDeleteButton(){
         return "deleteFotografo";
@@ -71,12 +104,15 @@ public class GalleryController implements WebMvcConfigurer {
         return "results";
     }
 
+
     @GetMapping("/photographers/all")
     public String loadRes(Model model){
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
-        model.addAttribute("alfa",fotografi);
+        model.addAttribute("fotografi",fotografi);
         return "results";
     }
+
+
 
     @GetMapping("/albums")
     public String getAlbumsGallery(){

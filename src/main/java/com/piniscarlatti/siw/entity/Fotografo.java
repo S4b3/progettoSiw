@@ -1,11 +1,8 @@
 package com.piniscarlatti.siw.entity;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -21,7 +18,7 @@ public class Fotografo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
@@ -33,7 +30,7 @@ public class Fotografo implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "fotografo", cascade = CascadeType.ALL)
-    @MapKey(name ="_id")
+    @MapKey(name ="id")
     private Map<Long, Album> album;
 
 
@@ -43,7 +40,7 @@ public class Fotografo implements Serializable {
         this.email = email;
         this.album = new HashMap<>();
         Album generale = new Album("Tutte le foto", this);
-        this.album.put(generale.get_id(), generale);
+        this.album.put(generale.getId(), generale);
     }
 
     public Fotografo() {
@@ -52,7 +49,7 @@ public class Fotografo implements Serializable {
     public void setAlbumBase(){
         this.album = new HashMap<>();
         Album generale = new Album("Tutte le foto", this);
-        this.album.put(generale.get_id(), generale);
+        this.album.put(generale.getId(), generale);
     }
 
 }

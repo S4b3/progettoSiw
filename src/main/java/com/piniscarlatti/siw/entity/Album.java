@@ -16,10 +16,10 @@ public class Album implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
+    private Long id;
     private String nome;
     @OneToMany(mappedBy = "album")
-    @MapKey(name = "_id")
+    @MapKey(name = "id")
     private Map<Long, Foto> fotografie;
     @ManyToOne
     private Fotografo fotografo;

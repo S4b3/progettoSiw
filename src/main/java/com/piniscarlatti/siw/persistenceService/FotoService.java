@@ -23,7 +23,7 @@ public class FotoService implements FotoServiceInterface{
 
     @Override
     public void deleteFoto(Foto foto) {
-        fotoRepository.deleteById(foto.get_id());
+        fotoRepository.deleteById(foto.getId());
     }
 
     @Override
@@ -37,7 +37,7 @@ public class FotoService implements FotoServiceInterface{
         List<Foto> fotoDaEliminare = new ArrayList<>();
         List<Foto> fotos = fotoRepository.findAll();
         fotos.parallelStream()
-                .filter(i -> i.getAlbum().get_id() == album.get_id())
+                .filter(i -> i.getAlbum().getId() == album.getId())
                 .map(i -> fotoDaEliminare.add(i));
     }
 

@@ -12,7 +12,7 @@ public class Funzionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)

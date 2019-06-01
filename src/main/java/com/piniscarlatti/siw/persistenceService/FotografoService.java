@@ -21,7 +21,7 @@ public class FotografoService implements FotografoServiceInteface {
     @Override
     public void deleteFotografo(Fotografo fotografo) {
 
-        fotografoRepository.deleteById(fotografo.get_id());
+        fotografoRepository.deleteById(fotografo.getId());
 
     }
 

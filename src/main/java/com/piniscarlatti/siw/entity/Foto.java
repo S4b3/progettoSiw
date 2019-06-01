@@ -13,7 +13,7 @@ public class Foto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
+    private Long id;
     @Column(nullable = false)
     private String nome;
     private String categoria;
