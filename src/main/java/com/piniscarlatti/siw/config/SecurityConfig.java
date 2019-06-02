@@ -1,8 +1,10 @@
 package com.piniscarlatti.siw.config;
 
+import com.piniscarlatti.siw.service.FunzionarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,12 +16,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    FunzionarioDetailsService funzionarioDetailsService;
+
+    public SecurityConfig(FunzionarioDetailsService funzionarioDetailsService) {
+        this.funzionarioDetailsService = funzionarioDetailsService;
+    }
+
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws
-            Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("funzionario").password("secured").roles("FUNZIONARIO");
+    protected void configure(AuthenticationManagerBuilder auth){
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
@@ -28,15 +34,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/gallery/**").hasRole("FUNZIONARIO")
                     .and()
-                .formLogin()
-                    .loginPage("/login").failureUrl("/login-error")
-                    .defaultSuccessUrl("/home", true);
+                    .httpBasic();
     }
 
+    @Bean
+    DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(this.funzionarioDetailsService);
+
+        return daoAuthenticationProvider;
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
 }
