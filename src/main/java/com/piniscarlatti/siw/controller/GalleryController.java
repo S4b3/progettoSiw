@@ -1,15 +1,14 @@
 package com.piniscarlatti.siw.controller;
 
 
-import com.piniscarlatti.siw.entity.Foto;
 import com.piniscarlatti.siw.entity.Fotografo;
+import com.piniscarlatti.siw.repository.AlbumRepository;
 import com.piniscarlatti.siw.repository.FotografoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -25,9 +24,12 @@ public class GalleryController implements WebMvcConfigurer {
     @Autowired
     FotografoRepository fotografoRepository;
 
+    @Autowired
+    AlbumRepository albumRepository;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/results").setViewName("results");
+        registry.addViewController("/results").setViewName("visualizzaFotografi");
     }
 
     @GetMapping
@@ -55,7 +57,7 @@ public class GalleryController implements WebMvcConfigurer {
 
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
         model.addAttribute("fotografi",fotografi);
-        return "results";
+        return "visualizzaFotografi";
     }
 
     //Cancellazione singolo fotografo
@@ -65,7 +67,7 @@ public class GalleryController implements WebMvcConfigurer {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
         fotografoRepository.delete(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
-        return "results";
+        return "visualizzaFotografi";
     }
 
     //Modifica dati fotografo
@@ -88,7 +90,7 @@ public class GalleryController implements WebMvcConfigurer {
 
         fotografoRepository.save(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
-        return "results";
+        return "visualizzaFotografi";
     }
 
     //Cancellazione di tutti i fotografi dal db
@@ -98,18 +100,30 @@ public class GalleryController implements WebMvcConfigurer {
     }
 
 
-    @PostMapping("/deletephotographers")
-    public  String deleteAllFotografi(){
-        fotografoRepository.deleteAll();
-        return "results";
+    //aggiunta album
+    @GetMapping("/album/{id}")
+    public String addAlbum(@PathVariable("id") Long id,Model model){
+
+        Fotografo fotografo = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+
+        model.addAttribute("albums",albumRepository.findByFotografo(fotografo));
+        return "visualizzaAlbum";
     }
 
 
+    @PostMapping("/deletephotographers")
+    public  String deleteAllFotografi() {
+        fotografoRepository.deleteAll();
+        return "visualizzaFotografi";
+    }
+
+    //visualizza fotografi
     @GetMapping("/photographers/all")
     public String loadRes(Model model){
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
         model.addAttribute("fotografi",fotografi);
-        return "results";
+        return "visualizzaFotografi";
     }
 
 

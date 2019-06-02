@@ -10,33 +10,31 @@
     <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-<!--/*@thymesVar id="fotografi" type="java.util.List"*/-->
 
-<div class="container my-5" th:switch="${fotografi}">
+<div class="container my-5" th:switch="${albums}">
     <div class="row">
         <div class="col-md-6">
-            <h2 th:case="null">No users yet!</h2>
+            <h2 th:case="null">No Albums yet!</h2>
             <div th:case="*">
-                <h2 class="my-5">Fotografi</h2>
+                <h2 class="my-5"> Album di
+                    <td th:text="${albums.get(0).getFotografo().getNome()}"></td>
+                </h2>
                 <table class="table table-striped table-responsive-md">
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Email</th>
-                        <th>Elimina</th>
+                        <th>Foto</th>
                         <th>Modifica</th>
+                        <th>Elimina</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="fotografo : ${fotografi}">
-                        <td th:text="${fotografo.nome}"></td>
-                        <td th:text="${fotografo.cognome}"></td>
-                        <td th:text="${fotografo.email}"></td>
-                        <td><a class="btn btn-primary"
-                               th:href="@{/gallery/photographers/delete/{id}(id=${fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
-                        <td><a th:href="@{/gallery/photographers/edit/{id}(id=${fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                    <tr th:each="album : ${albums}">
+                        <td th:text="${album.nome}"></td>
+                        <td><a th:href="@{/gallery/album/add/{id}(id=${album.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                        <td><a th:href="@{/gallery/photographers/edit/{id}(id=${album.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                        <td><a class="btn btn-primary" th:href="@{/gallery/photographers/delete/{id}(id=${album.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
