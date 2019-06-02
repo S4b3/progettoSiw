@@ -5,15 +5,13 @@
     <title>Hello World!</title>
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
-<h1>Hello, This is Home page!</h1>
-<a style="color: blue" th:href="@{/user}">User Page</a>
-<br />
-<a style="color: blue" th:href="@{/admin}">Admin Page</a>
-<a href="/gallery">Go to gallery</a>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+    <h1>This is Home page!</h1>
+    <a style="color: blue" th:href="@{/gallery}">Gallery Page</a>
+    <a style="color: blue" th:href="@{/funzionario}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">
+        Funzionari's page
+    </a>
 </body>
 </html>
 
