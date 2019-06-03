@@ -20,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/gallery/photographers")
+@RequestMapping("/photographers")
 public class FotografoController implements WebMvcConfigurer {
-
 
     @Autowired
     FotografoRepository fotografoRepository;
@@ -30,14 +29,19 @@ public class FotografoController implements WebMvcConfigurer {
     @Autowired
     AlbumRepository albumRepository;
 
-
-    //aggiunta di un fotografo
+    //visualizza fotografi
     @GetMapping
+    public String loadRes(Model model) {
+        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
+        model.addAttribute("fotografi", fotografi);
+        return "visualizzaFotografi";
+    }
+    //aggiunta di un fotografo
+    @GetMapping("/add")
     public String showForm(Fotografo fotografo, Model model) {
         return "formFotografo";
     }
-
-    @PostMapping
+    @PostMapping("/add")
     public RedirectView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
 
         try {
@@ -46,26 +50,24 @@ public class FotografoController implements WebMvcConfigurer {
 
         } catch (Exception e) {
 
-            return new RedirectView("/gallery/photographers");
+            return new RedirectView("/photographers/add");
         }
 
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
         model.addAttribute("fotografi", fotografi);
-        return new RedirectView("/gallery/photographers/all");
+        return new RedirectView("/photographers");
     }
-
     //Cancellazione singolo fotografo
-    @GetMapping("/delete/{id}")
-    public String deletePhotographers(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/{id}/delete")
+    public RedirectView deletePhotographers(@PathVariable("id") Long id, Model model) {
         Fotografo fotografo = fotografoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
         fotografoRepository.delete(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
-        return "visualizzaFotografi";
+        return new RedirectView("/photographers");
     }
-
     //Modifica dati fotografo
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Fotografo fotografo = fotografoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
@@ -73,28 +75,15 @@ public class FotografoController implements WebMvcConfigurer {
         model.addAttribute("fotografo", fotografo);
         return "modificaFotografo";
     }
-
-    @PostMapping("/update/{id}")
-    public String updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo,
+    @PostMapping("/{id}/update")
+    public RedirectView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo,
                                   BindingResult result, Model model) {
         /*if (result.hasErrors()) {
             fotografo.setId(id);
             return "modificaFotografo";
         }*/
-
         fotografoRepository.save(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
-        return "visualizzaFotografi";
+        return new RedirectView("/photographers");
     }
-
-
-    //visualizza fotografi
-    @GetMapping("/all")
-    public String loadRes(Model model) {
-        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
-        model.addAttribute("fotografi", fotografi);
-        return "visualizzaFotografi";
-    }
-
-
 }

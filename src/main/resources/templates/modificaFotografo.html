@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="float">
-    <form class="form-horizontal" action="#" th:action="@{/gallery/photographers/update/{id}(id=${fotografo.id})}" th:object="${fotografo}"
+    <form class="form-horizontal" action="#" th:action="@{/photographers/{id}/update(id=${fotografo.id})}" th:object="${fotografo}"
           method="post">
         <fieldset>
             <legend>Inserisci Dati Fotografo</legend>

@@ -35,14 +35,14 @@
                         <td th:text="${fotografo.nome}"></td>
                         <td th:text="${fotografo.cognome}"></td>
                         <td th:text="${fotografo.email}"></td>
-                        <td><a th:href="@{/gallery/album/{id}(id=${fotografo.id})}" class="btn btn-primary"> Album</a></td>
-                        <td><a class="btn btn-primary" th:href="@{/gallery/photographers/delete/{id}(id=${fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
-                        <td><a th:href="@{/gallery/photographers/edit/{id}(id=${fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                        <td><a th:href="@{/photographers/{id}/album(id=${fotografo.id})}" class="btn btn-primary"> Album</a></td>
+                        <td><a class="btn btn-primary" th:href="@{/photographers/{id}/delete(id=${fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
+                        <td><a th:href="@{/photographers/{id}/edit(id=${fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="my-5"><a href="/gallery/photographers" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+            <p class="my-5"><a href="/photographers/add" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
         </div>
     </div>
 </div>

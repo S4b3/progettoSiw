@@ -39,7 +39,7 @@
                     </tbody>
                 </table>
             </div>
-            <p class="my-5"><a th:href="@{/gallery/album/add/{id}(id=${albums.get(0).getFotografo().getId()})}" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+            <p class="my-5"><a th:href="@{/photographers/{id}/album/add/(id=${albums.get(0).getFotografo().getId()})}" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
         </div>
     </div>
 </div>

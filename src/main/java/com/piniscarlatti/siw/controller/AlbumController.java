@@ -5,7 +5,6 @@ import com.piniscarlatti.siw.entity.Album;
 import com.piniscarlatti.siw.entity.Fotografo;
 import com.piniscarlatti.siw.repository.AlbumRepository;
 import com.piniscarlatti.siw.repository.FotografoRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/gallery/album")
+@RequestMapping("/photographers/{id}/album")
 public class AlbumController implements WebMvcConfigurer {
 
     @Autowired
@@ -32,13 +31,31 @@ public class AlbumController implements WebMvcConfigurer {
     @Autowired
     AlbumRepository albumRepository;
 
-    //aggiunta di un album
-    @GetMapping("/add/{id}")
-    public String showForm(Album album, @PathVariable("id") Long id,Model model) {
-        return "formAlbum";
+
+    //visualizzazione
+    @GetMapping
+    public String seeAlbum(@PathVariable("id") Long id, Model model) {
+
+        Fotografo fotografo = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+
+        model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
+        return "visualizzaAlbum";
     }
 
-    @PostMapping("/add/{id}")
+    //aggiunta di un album
+    @GetMapping("/add")
+    public String showForm(@PathVariable("id") Long id,Model model) {
+        System.out.println(id);
+
+        model.addAttribute("album", new Album());
+        model.addAttribute("photographId", id);
+        System.out.println(model.asMap().get("photographId"));
+
+        return "modificaAlbum";
+    }
+
+    @PostMapping("/add")
     public RedirectView insertAlbum(@Valid Album album,@PathVariable("id")  Long id, BindingResult bindingResult, Model model) {
 
         try {
@@ -49,23 +66,12 @@ public class AlbumController implements WebMvcConfigurer {
 
         } catch (Exception e) {
 
-            return new RedirectView("/gallery/album/add/{id}");
+            return new RedirectView("/photographers/{id}/album/add");
         }
 
         List<Album> albums = new ArrayList<>(albumRepository.findAll());
         model.addAttribute("albums", albums);
-        return new RedirectView("/gallery/album/{id}");
-    }
-
-    //aggiunta album
-    @GetMapping("/{id}")
-    public String addAlbum(@PathVariable("id") Long id, Model model) {
-
-        Fotografo fotografo = fotografoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-
-        model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
-        return "visualizzaAlbum";
+        return new RedirectView("/photographers/{id}/album");
     }
 
 }

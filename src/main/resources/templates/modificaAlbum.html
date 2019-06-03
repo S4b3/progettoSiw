@@ -9,8 +9,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<p th:text="${photographId}"></p>
+<p th:text="${album.id}"></p>
 <div class="float">
-    <form class="form-horizontal" action="#" th:action="@{/gallery/album/add/{id}(id=${album.id})}" th:object="${album}"
+    <form class="form-horizontal" action="#" th:action="@{/photographers/{id}/album/add(id=${photographId})}" th:object="${album}"
           method="post">
         <fieldset>
             <legend>Inserisci Album</legend>

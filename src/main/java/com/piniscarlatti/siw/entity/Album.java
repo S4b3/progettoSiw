@@ -24,7 +24,7 @@ public class Album implements Serializable {
     @ManyToOne
     private Fotografo fotografo;
 
-    protected Album() {
+    public Album() {
 
     }
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
-@RequestMapping("/gallery")
+@RequestMapping
 public class GalleryController implements WebMvcConfigurer {
 
 
