@@ -29,14 +29,14 @@ public class FotografoController implements WebMvcConfigurer {
     @Autowired
     AlbumRepository albumRepository;
 
-    //visualizza fotografi
+    //Visualizza fotografi
     @GetMapping
     public String loadRes(Model model) {
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
         model.addAttribute("fotografi", fotografi);
         return "visualizzaFotografi";
     }
-    //aggiunta di un fotografo
+    //Aggiunta di un fotografo
     @GetMapping("/add")
     public String showForm(Fotografo fotografo, Model model) {
         return "formFotografo";

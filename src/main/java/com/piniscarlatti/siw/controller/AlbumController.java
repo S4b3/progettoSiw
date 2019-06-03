@@ -40,12 +40,13 @@ public class AlbumController implements WebMvcConfigurer {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
 
         model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
+        model.addAttribute("fotografo", fotografo);
         return "visualizzaAlbum";
     }
 
     //aggiunta di un album
     @GetMapping("/add")
-    public String showForm(@PathVariable("id") Long id,Model model) {
+    public String showForm(@PathVariable("id") Long id, Model model) {
         System.out.println(id);
 
         model.addAttribute("album", new Album());
@@ -56,7 +57,7 @@ public class AlbumController implements WebMvcConfigurer {
     }
 
     @PostMapping("/add")
-    public RedirectView insertAlbum(@Valid Album album,@PathVariable("id")  Long id, BindingResult bindingResult, Model model) {
+    public RedirectView insertAlbum(@Valid Album album, @PathVariable("id") Long id, BindingResult bindingResult, Model model) {
 
         try {
             Fotografo fotografo = fotografoRepository.findById(id)
@@ -74,4 +75,15 @@ public class AlbumController implements WebMvcConfigurer {
         return new RedirectView("/photographers/{id}/album");
     }
 
+    //photographers/{id}/album/{idAlbum}/delete
+    @GetMapping("/{idAlbum}/delete")
+    public RedirectView deletePhotographers(@PathVariable("id") Long id, @PathVariable("idAlbum") Long idAlbum, Model model) {
+        Fotografo fotografo = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+        Album album = albumRepository.findById(idAlbum)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Album Id:" + id));
+        albumRepository.delete(album);
+        model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
+        return new RedirectView("/photographers/{id}/album");
+    }
 }
