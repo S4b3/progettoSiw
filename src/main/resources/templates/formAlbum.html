@@ -10,10 +10,10 @@
 </head>
 <body>
 <div class="float">
-    <form class="form-horizontal" action="#" th:action="@{/gallery/photographers}" th:object="${fotografo}"
+    <form class="form-horizontal" action="#" th:action="@{/gallery/album/add/{id}(id=${album.id})}" th:object="${album}"
           method="post">
         <fieldset>
-            <legend>Inserisci Fotografo</legend>
+            <legend>Inserisci Album</legend>
             <div class="form-group">
                 <label class="col-md-4 control-label" >Nome</label>
                 <div class="col-md-4">
@@ -21,23 +21,6 @@
                     <td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</td>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" >Cognome</label>
-                <div class="col-md-4">
-                    <input name="textinput" type="text" placeholder="Cognome" class="form-control input-md" required="" th:field="*{cognome}"  >
-                    <td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}">Cognome Error</td>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" >Email</label>
-                <div class="col-md-4">
-                    <input name="emailinput" type="email" placeholder="Email" class="form-control input-md" required="" th:field="*{email}"  >
-                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</td>
-                </div>
-            </div>
-
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" ></label>

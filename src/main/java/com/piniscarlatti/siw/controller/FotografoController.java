@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class FotografoController implements WebMvcConfigurer {
     }
 
     @PostMapping
-    public String insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
+    public RedirectView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
 
         try {
             fotografo.setAlbumBase();
@@ -45,12 +46,12 @@ public class FotografoController implements WebMvcConfigurer {
 
         } catch (Exception e) {
 
-            return "formFotografo";
+            return new RedirectView("/gallery/photographers");
         }
 
         List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
         model.addAttribute("fotografi", fotografi);
-        return "visualizzaFotografi";
+        return new RedirectView("/gallery/photographers/all");
     }
 
     //Cancellazione singolo fotografo
