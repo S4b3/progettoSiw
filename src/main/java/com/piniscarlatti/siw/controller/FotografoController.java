@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -42,20 +43,16 @@ public class FotografoController implements WebMvcConfigurer {
         return "formFotografo";
     }
     @PostMapping("/add")
-    public RedirectView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
+    public ModelAndView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
 
-        try {
-            fotografo.setAlbumBase();
-            fotografoRepository.save(fotografo);
+        if (bindingResult.hasErrors() || fotografoRepository.existsByEmail(fotografo.getEmail()))
+            return new ModelAndView("formFotografo");
 
-        } catch (Exception e) {
+        fotografo.setAlbumBase();
+        fotografoRepository.save(fotografo);
 
-            return new RedirectView("/photographers/add");
-        }
-
-        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
-        model.addAttribute("fotografi", fotografi);
-        return new RedirectView("/photographers");
+        model.addAttribute("fotografi", fotografoRepository.findAll());
+        return new ModelAndView("redirect:/photographers");
     }
     //Cancellazione singolo fotografo
     @GetMapping("/{id}/delete")
@@ -76,14 +73,14 @@ public class FotografoController implements WebMvcConfigurer {
         return "modificaFotografo";
     }
     @PostMapping("/{id}/update")
-    public RedirectView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo,
-                                  BindingResult result, Model model) {
-        /*if (result.hasErrors()) {
-            fotografo.setId(id);
-            return "modificaFotografo";
-        }*/
+    public ModelAndView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo, BindingResult result, Model model) {
+
+        if (result.hasErrors() || fotografoRepository.existsByEmail(fotografo.getEmail()))
+            return new ModelAndView("redirect:/photographers/{id}/edit");
+
         fotografoRepository.save(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
-        return new RedirectView("/photographers");
+        return new ModelAndView("redirect:/photographers");
     }
+
 }

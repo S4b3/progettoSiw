@@ -47,7 +47,6 @@ public class AlbumController implements WebMvcConfigurer {
     //aggiunta di un album
     @GetMapping("/add")
     public String showForm(@PathVariable("id") Long id, Model model) {
-        System.out.println(id);
 
         model.addAttribute("album", new Album());
         model.addAttribute("photographId", id);
@@ -59,16 +58,10 @@ public class AlbumController implements WebMvcConfigurer {
     @PostMapping("/add")
     public RedirectView insertAlbum(@Valid Album album, @PathVariable("id") Long id, BindingResult bindingResult, Model model) {
 
-        try {
-            Fotografo fotografo = fotografoRepository.findById(id)
+        Fotografo fotografo = fotografoRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-            album.setFotografo(fotografo);
-            albumRepository.save(album);
-
-        } catch (Exception e) {
-
-            return new RedirectView("/photographers/{id}/album/add");
-        }
+        album.setFotografo(fotografo);
+        albumRepository.save(album);
 
         List<Album> albums = new ArrayList<>(albumRepository.findAll());
         model.addAttribute("albums", albums);

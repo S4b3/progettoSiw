@@ -3,6 +3,8 @@ package com.piniscarlatti.siw.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -32,7 +34,6 @@ public class Fotografo implements Serializable {
     @OneToMany(mappedBy = "fotografo", cascade = CascadeType.ALL)
     @MapKey(name ="id")
     private Map<Long, Album> album;
-
 
     public Fotografo(String nome, String cognome, String email) {
         this.nome = nome;
