@@ -24,6 +24,7 @@ public class Funzionario {
     @Column(nullable = false)
     private String password;
 
+
     private String role;
 
     public Funzionario(){ }

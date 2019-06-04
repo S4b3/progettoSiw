@@ -15,10 +15,6 @@ public class FunzionarioDetailsService implements UserDetailsService {
     @Autowired
     private FunzionarioRepository funzionarioRepository;
 
-    public FunzionarioDetailsService(FunzionarioRepository funzionarioRepository){
-        this.funzionarioRepository = funzionarioRepository;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Funzionario funzionario = funzionarioRepository.findByUsername(username);
