@@ -40,13 +40,15 @@ public class FotografoController implements WebMvcConfigurer {
     //Aggiunta di un fotografo
     @GetMapping("/add")
     public String showForm(Fotografo fotografo, Model model) {
+
         return "formFotografo";
     }
     @PostMapping("/add")
     public ModelAndView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
 
-        if (bindingResult.hasErrors() || fotografoRepository.existsByEmail(fotografo.getEmail()))
-            return new ModelAndView("formFotografo");
+        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
+        if (bindingResult.hasErrors() || emailExist)
+            return new ModelAndView("formFotografo", "emailExist", emailExist);
 
         fotografo.setAlbumBase();
         fotografoRepository.save(fotografo);
@@ -69,13 +71,17 @@ public class FotografoController implements WebMvcConfigurer {
         Fotografo fotografo = fotografoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
 
+        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
+
+        model.addAttribute("emailExist",emailExist);
         model.addAttribute("fotografo", fotografo);
         return "modificaFotografo";
     }
     @PostMapping("/{id}/update")
     public ModelAndView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo, BindingResult result, Model model) {
 
-        if (result.hasErrors() || fotografoRepository.existsByEmail(fotografo.getEmail()))
+        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
+        if (result.hasErrors() || emailExist)
             return new ModelAndView("redirect:/photographers/{id}/edit");
 
         fotografoRepository.save(fotografo);
