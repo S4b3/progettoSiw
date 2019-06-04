@@ -71,18 +71,20 @@ public class FotografoController implements WebMvcConfigurer {
         Fotografo fotografo = fotografoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
 
-        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
-
-        model.addAttribute("emailExist",emailExist);
         model.addAttribute("fotografo", fotografo);
         return "modificaFotografo";
     }
+
+
     @PostMapping("/{id}/update")
     public ModelAndView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo, BindingResult result, Model model) {
 
-        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
+        Fotografo fotografoVecchio = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+
+        boolean emailExist = (fotografoRepository.existsByEmail(fotografo.getEmail()) && !fotografoVecchio.getEmail().equals(fotografo.getEmail()));
         if (result.hasErrors() || emailExist)
-            return new ModelAndView("redirect:/photographers/{id}/edit");
+            return new ModelAndView("modificaFotografo","emailExist",emailExist);
 
         fotografoRepository.save(fotografo);
         model.addAttribute("fotografi", fotografoRepository.findAll());
