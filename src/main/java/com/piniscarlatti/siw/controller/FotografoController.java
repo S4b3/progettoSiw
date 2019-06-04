@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.RedirectView;
@@ -37,6 +34,14 @@ public class FotografoController implements WebMvcConfigurer {
         model.addAttribute("fotografi", fotografi);
         return "visualizzaFotografi";
     }
+    //visualizza fotografi per iniziali
+    @GetMapping(value = "/{nome}")
+    public String loadByInitial(@RequestParam("nome") String nome,Model model){
+        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findByNomeStartingWith(nome));
+        model.addAttribute("fotografi", fotografi);
+        return "visualizzaFotografi";
+    }
+
     //Aggiunta di un fotografo
     @GetMapping("/add")
     public String showForm(Fotografo fotografo, Model model) {
@@ -81,8 +86,8 @@ public class FotografoController implements WebMvcConfigurer {
 
         Fotografo fotografoVecchio = fotografoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-
         boolean emailExist = (fotografoRepository.existsByEmail(fotografo.getEmail()) && !fotografoVecchio.getEmail().equals(fotografo.getEmail()));
+
         if (result.hasErrors() || emailExist)
             return new ModelAndView("modificaFotografo","emailExist",emailExist);
 
@@ -90,5 +95,7 @@ public class FotografoController implements WebMvcConfigurer {
         model.addAttribute("fotografi", fotografoRepository.findAll());
         return new ModelAndView("redirect:/photographers");
     }
+
+
 
 }

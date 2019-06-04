@@ -31,7 +31,7 @@
                     <tbody>
                     <tr th:each="album : ${albums}">
                         <td th:text="${album.nome}"></td>
-                        <td><a th:href="@{/gallery/album/add/{id}(id=${album.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                        <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                         <td><a th:href="@{/gallery/photographers/edit/{id}(id=${album.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                         <td><a class="btn btn-primary" th:href="@{/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>

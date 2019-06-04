@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface FotografoRepository extends JpaRepository<Fotografo, Long> {
 
-    Optional<Fotografo> findByEmail(String email);
+    List<Fotografo> findByNomeStartingWith(String nome);
     List<Fotografo> findByNome(String nome);
     boolean existsByEmail(String email);
 
