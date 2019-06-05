@@ -9,15 +9,18 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<p th:text="${photographId}"></p>
+<p th:text="${album.id}"></p>
 <div class="float">
-    <form class="form-horizontal" action="#" th:action="@{/photographers/{idF}/album/{idA}/update(idA=${album.getId()},idF=${album.getFotografo().getId()})}" th:object="${album}"
+    <form class="form-horizontal" action="#" th:action="@{/photographers/{id}/album/add(id=${photographId})}" th:object="${album}"
           method="post">
         <fieldset>
-            <legend>Modifica Album</legend>
+            <legend>Inserisci Album</legend>
             <div class="form-group">
                 <label class="col-md-4 control-label" >Nome</label>
                 <div class="col-md-4">
                     <input name="textinput" type="text" placeholder="Nome" class="form-control input-md" required=""  th:field="*{nome} "  >
+                    <td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</td>
                 </div>
             </div>
             <!-- Button (Double) -->

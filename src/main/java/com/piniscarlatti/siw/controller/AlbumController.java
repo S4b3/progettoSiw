@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -52,7 +53,7 @@ public class AlbumController implements WebMvcConfigurer {
         model.addAttribute("photographId", id);
         System.out.println(model.asMap().get("photographId"));
 
-        return "modificaAlbum";
+        return "aggiungiAlbum";
     }
 
     @PostMapping("/add")
@@ -79,4 +80,27 @@ public class AlbumController implements WebMvcConfigurer {
         model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
         return new RedirectView("/photographers/{id}/album");
     }
+
+    //Modifica nome album
+    @GetMapping("/{idAlbum}/edit")
+    public String showUpdateForm(  @PathVariable("idAlbum") Long idAlbum, Model model) {
+        Album album = albumRepository.findById(idAlbum)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Album Id:" + idAlbum));
+
+        model.addAttribute("album", album);
+        return "modificaAlbum";
+    }
+
+    @PostMapping("/{idAlbum}/update")
+    public ModelAndView updateAlbum(@PathVariable("idAlbum") Long idAlbum, @PathVariable("id") Long id,@Valid Album album, BindingResult bindingResult, Model model) {
+        Fotografo fotografo = fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
+        Album albumNuovo = albumRepository.findById(idAlbum)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Album Id:" + idAlbum));
+        albumNuovo.setNome(album.getNome());
+        albumRepository.save(albumNuovo);
+        model.addAttribute("albums", albumRepository.findByFotografo(fotografo));
+        return new ModelAndView("redirect:/photographers/{id}/album");
+    }
+
 }

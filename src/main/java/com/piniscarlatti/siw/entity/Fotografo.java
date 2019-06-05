@@ -9,13 +9,14 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Entity
 @Table(name = "fotografo")
 @Data
 @EqualsAndHashCode
-public class Fotografo implements Serializable {
+public class Fotografo implements Serializable,Comparable<Fotografo> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,4 +53,57 @@ public class Fotografo implements Serializable {
         this.album.put(generale.getId(), generale);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fotografo fotografo = (Fotografo) o;
+        return Objects.equals(id, fotografo.id) &&
+                Objects.equals(email, fotografo.email) &&
+                Objects.equals(nome, fotografo.nome) &&
+                Objects.equals(cognome, fotografo.cognome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, nome, cognome);
+    }
+
+    @Override
+    public int compareTo(Fotografo that) {
+
+        return this.getEmail().compareTo(that.getEmail());
+    }
 }
