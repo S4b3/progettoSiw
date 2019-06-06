@@ -12,6 +12,6 @@ public interface FotografoDao {
     Fotografo findById(Long id);
     void save(Fotografo fotografo);
     void delete(Fotografo fotografo);
-    List<Fotografo> findByNomeStartingWith(String nome);
+    List<Fotografo> findFotografoStartingWith(String nome,String nome1,String nome2);
 
 }

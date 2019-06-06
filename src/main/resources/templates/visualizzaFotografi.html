@@ -32,6 +32,7 @@
                         <th>Cognome</th>
                         <th>Email</th>
                         <th>Album</th>
+                        <th>Dettagli</th>
                         <th>Elimina</th>
                         <th>Modifica</th>
                     </tr>
@@ -42,6 +43,7 @@
                         <td th:text="${fotografo.cognome}"></td>
                         <td th:text="${fotografo.email}"></td>
                         <td><a th:href="@{/photographers/{id}/album(id=${fotografo.id})}" class="btn btn-primary"> Album</a></td>
+                        <td><a th:href="@{/photographers/{id}/details(id=${fotografo.id})}" class="btn btn-primary"> Dettagli</a></td>
                         <td><a class="btn btn-primary" th:href="@{/photographers/{id}/delete(id=${fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
                         <td><a th:href="@{/photographers/{id}/edit(id=${fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                     </tr>

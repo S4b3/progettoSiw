@@ -43,4 +43,8 @@ public class Album implements Serializable {
         }
         return false;
     }
+
+    public int numeroFoto(){
+        return this.fotografie.size();
+    }
 }

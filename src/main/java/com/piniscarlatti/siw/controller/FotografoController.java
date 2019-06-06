@@ -59,4 +59,10 @@ public class FotografoController implements WebMvcConfigurer {
         fotografoService.save(fotografo);
         return new ModelAndView("redirect:/photographers","fotografi", fotografoService.getAllFotografi());
     }
+    @GetMapping("/{id}/details")
+    public ModelAndView showDetails(@PathVariable("id")Long id){
+        Fotografo fotografo = fotografoService.getFotografoById(id);
+        return new ModelAndView("dettagliFotografo","fotografo",fotografo);
+    }
+
 }

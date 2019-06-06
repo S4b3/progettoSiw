@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -68,5 +69,10 @@ public class Fotografo implements Serializable,Comparable<Fotografo> {
     public int compareTo(Fotografo that) {
 
         return this.getEmail().compareTo(that.getEmail());
+    }
+
+    public int getNumeroFoto(){
+        return album.entrySet().stream()
+                .map(i-> i.getValue().numeroFoto()).collect(Collectors.summingInt(Integer::intValue));
     }
 }

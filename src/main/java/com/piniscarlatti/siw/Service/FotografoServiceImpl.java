@@ -21,9 +21,9 @@ public class FotografoServiceImpl implements FotografoService {
 
     @Override
     public List<Fotografo> getFotografiStartingWith(String nome) {
-
-        return fotografoDao.findByNomeStartingWith(nome);
+        return fotografoDao.findFotografoStartingWith(nome,nome,nome);
     }
+
 
     @Override
     public Fotografo getFotografoById(Long id) {

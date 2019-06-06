@@ -45,8 +45,8 @@ public class FotografoDaoImpl implements FotografoDao {
     }
 
     @Override
-    public List<Fotografo> findByNomeStartingWith(String nome) {
-        return fotografoRepository.findByNomeStartingWith(nome);
+    public List<Fotografo> findFotografoStartingWith(String nome,String nome1,String nome2) {
+        return fotografoRepository.findByNomeContainsOrCognomeContainsOrEmailContains(nome,nome1,nome2);
     }
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<input type="button" value="Go back my friend" onclick="history.back()" class="btn btn-primary">
 <div class="container my-5" th:switch="${albums}">
     <div class="row">
         <div class="col-md-6">
