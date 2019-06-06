@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<p th:text="${photographId}"></p>
+<p th:text="${album.id}"></p>
+<div class="float">
+    <form class="form-horizontal" action="#" th:action="@{/photographers/{id}/album/add(id=${photographId})}" th:object="${album}"
+          method="post">
+        <fieldset>
+            <legend>Inserisci Album</legend>
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Nome</label>
+                <div class="col-md-4">
+                    <input name="textinput" type="text" placeholder="Nome" class="form-control input-md" required=""  th:field="*{nome} "  >
+                    <td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</td>
+                </div>
+            </div>
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" ></label>
+                <div class="col-md-8">
+                    <button id="button1id" name="button1id" class="btn btn-success">Inserisci</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

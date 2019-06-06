@@ -1,43 +1,55 @@
 package com.piniscarlatti.siw.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+
 
 @Entity
+@Table(name = "fotografo")
 @Data
 @EqualsAndHashCode
 public class Fotografo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
-    @Column(unique = true)
+    private Long id;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
+    @Size(min = 3, max = 30)
     private String nome;
+    @Column(nullable = false)
+    @Size(min = 3, max = 30)
     private String cognome;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fotografo", cascade = CascadeType.ALL)
-    private Map<Long,Album> album;
+    @MapKey(name ="id")
+    private Map<Long, Album> album;
 
-
-    public Fotografo (String nome, String cognome,String email) {
+    public Fotografo(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.album = new HashMap<>();
         Album generale = new Album("Tutte le foto", this);
-        this.album.put(generale.get_id(), generale);
+        this.album.put(generale.getId(), generale);
     }
-    protected Fotografo(){}
 
+    public Fotografo() {
+    }
+
+    public void setAlbumBase(){
+        this.album = new HashMap<>();
+        Album generale = new Album("Tutte le foto", this);
+        this.album.put(generale.getId(), generale);
+    }
 
 }

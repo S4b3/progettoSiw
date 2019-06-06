@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.PreUpdate;
 import java.io.Console;
+import java.security.Principal;
 
 @Controller
 public class ProjectController {
@@ -22,10 +26,16 @@ public class ProjectController {
     @Autowired
     PasswordEncoder pwd;
 
-
     @GetMapping("/home")
     public String getHome(){
         return "home";
+    }
+
+    @RequestMapping("user")
+    @ResponseBody
+    public Principal user(Principal principal)
+    {
+        return principal;
     }
 
 

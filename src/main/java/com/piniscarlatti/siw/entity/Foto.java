@@ -7,20 +7,28 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "fotografie")
 @EqualsAndHashCode
 public class Foto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long _id;
+    private Long id;
+    @Column(nullable = false)
     private String nome;
     private String categoria;
-    @OneToOne
-    private Fotografo fotografo;
+    @ManyToOne
+    private Album album;
 
-    protected Foto(){}
 
-    public Foto(String nome, String categoria){
-        this.nome=nome;
-        this.categoria=categoria;
+    protected Foto() {
     }
+
+    public Foto(String nome, String categoria, Album album) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.album = album;
+    }
+
 }
+
