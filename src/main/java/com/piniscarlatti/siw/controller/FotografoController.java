@@ -1,101 +1,62 @@
 package com.piniscarlatti.siw.controller;
 
-
+import com.piniscarlatti.siw.Service.FotografoServiceImpl;
 import com.piniscarlatti.siw.entity.Fotografo;
-import com.piniscarlatti.siw.repository.AlbumRepository;
-import com.piniscarlatti.siw.repository.FotografoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/photographers")
+@AllArgsConstructor
 public class FotografoController implements WebMvcConfigurer {
 
-    @Autowired
-    FotografoRepository fotografoRepository;
-
-    @Autowired
-    AlbumRepository albumRepository;
-
+    private FotografoServiceImpl fotografoService;
     //Visualizza fotografi
     @GetMapping
-    public String loadRes(Model model) {
-        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findAll());
-        model.addAttribute("fotografi", fotografi);
-        return "visualizzaFotografi";
+    public ModelAndView loadFotografi() {
+        return new ModelAndView("visualizzaFotografi","fotografi", fotografoService.getAllFotografi());
     }
     //visualizza fotografi per iniziali
-    @GetMapping(value = "/{nome}")
-    public String loadByInitial(@RequestParam("nome") String nome,Model model){
-        List<Fotografo> fotografi = new ArrayList<>(fotografoRepository.findByNomeStartingWith(nome));
-        model.addAttribute("fotografi", fotografi);
-        return "visualizzaFotografi";
+    @GetMapping("/{nome}")
+    public ModelAndView loadByInitial(@RequestParam("nome") String nome){
+        return new ModelAndView("visualizzaFotografi","fotografi", fotografoService.getFotografiStartingWith(nome));
     }
-
     //Aggiunta di un fotografo
     @GetMapping("/add")
-    public String showForm(Fotografo fotografo, Model model) {
-
-        return "formFotografo";
+    public ModelAndView showForm() {
+        return new ModelAndView("formFotografo","fotografo",new Fotografo());
     }
     @PostMapping("/add")
-    public ModelAndView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult, Model model) {
-
-        boolean emailExist = fotografoRepository.existsByEmail(fotografo.getEmail());
+    public ModelAndView insertFotografo(@Valid Fotografo fotografo, BindingResult bindingResult) {
+        boolean emailExist = fotografoService.fotografoExistsByEmail(fotografo.getEmail());
         if (bindingResult.hasErrors() || emailExist)
             return new ModelAndView("formFotografo", "emailExist", emailExist);
-
-        fotografo.setAlbumBase();
-        fotografoRepository.save(fotografo);
-
-        model.addAttribute("fotografi", fotografoRepository.findAll());
-        return new ModelAndView("redirect:/photographers");
+        fotografoService.setAlbumAndSaveFotografo(fotografo);
+        return new ModelAndView("redirect:/photographers","fotografi",fotografoService.getAllFotografi());
     }
     //Cancellazione singolo fotografo
     @GetMapping("/{id}/delete")
-    public RedirectView deletePhotographers(@PathVariable("id") Long id, Model model) {
-        Fotografo fotografo = fotografoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-        fotografoRepository.delete(fotografo);
-        model.addAttribute("fotografi", fotografoRepository.findAll());
-        return new RedirectView("/photographers");
+    public ModelAndView deletePhotographers(@PathVariable("id") Long id) {
+        fotografoService.getFografoByIdAndDelete(id);
+        return new ModelAndView("redirect:/photographers","fotografi", fotografoService.getAllFotografi());
     }
     //Modifica dati fotografo
     @GetMapping("/{id}/edit")
-    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Fotografo fotografo = fotografoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-
-        model.addAttribute("fotografo", fotografo);
-        return "modificaFotografo";
+    public ModelAndView showUpdateForm(@PathVariable("id") Long id) {
+        return new ModelAndView("modificaFotografo","fotografo", fotografoService.getFotografoById(id));
     }
-
-
     @PostMapping("/{id}/update")
-    public ModelAndView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo, BindingResult result, Model model) {
-
-        Fotografo fotografoVecchio = fotografoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
-        boolean emailExist = (fotografoRepository.existsByEmail(fotografo.getEmail()) && !fotografoVecchio.getEmail().equals(fotografo.getEmail()));
-
+    public ModelAndView updateFotografo(@PathVariable("id") Long id, @Valid Fotografo fotografo, BindingResult result) {
+        Fotografo fotografoVecchio = fotografoService.getFotografoById(id);
+        boolean emailExist = fotografoService.existsAnotherEmail(fotografo.getEmail(),fotografoVecchio);
         if (result.hasErrors() || emailExist)
             return new ModelAndView("modificaFotografo","emailExist",emailExist);
-
-        fotografoRepository.save(fotografo);
-        model.addAttribute("fotografi", fotografoRepository.findAll());
-        return new ModelAndView("redirect:/photographers");
+        fotografoService.save(fotografo);
+        return new ModelAndView("redirect:/photographers","fotografi", fotografoService.getAllFotografi());
     }
-
-
-
 }

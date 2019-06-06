@@ -53,38 +53,6 @@ public class Fotografo implements Serializable,Comparable<Fotografo> {
         this.album.put(generale.getId(), generale);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,11 +62,6 @@ public class Fotografo implements Serializable,Comparable<Fotografo> {
                 Objects.equals(email, fotografo.email) &&
                 Objects.equals(nome, fotografo.nome) &&
                 Objects.equals(cognome, fotografo.cognome);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, nome, cognome);
     }
 
     @Override
