@@ -1,53 +1,54 @@
 package com.piniscarlatti.siw.Service;
 
-import com.piniscarlatti.siw.Dao.AlbumDaoImpl;
 import com.piniscarlatti.siw.entity.Album;
 import com.piniscarlatti.siw.entity.Fotografo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.piniscarlatti.siw.repository.AlbumRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
 
-    @Autowired
-    AlbumDaoImpl albumDao;
+    private AlbumRepository albumRepository;
 
     @Override
     public List<Album> getAllAlbum() {
-        return albumDao.findAll();
+        return albumRepository.findAll();
     }
 
     @Override
     public Album getAlbumById(Long id) {
-        return albumDao.findById(id);
+        return albumRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Album Id:" + id));
     }
 
     @Override
     public List<Album> getAlbumsByFotografo(Fotografo fotografo) {
-        return albumDao.findByFotografo(fotografo);
+        return albumRepository.findByFotografo(fotografo);
     }
 
     @Override
     public void save(Album album) {
-        albumDao.save(album);
+        albumRepository.save(album);
     }
 
     @Override
     public void setFotografoAndSaveAlbum(Album album,Fotografo fotografo) {
         album.setFotografo(fotografo);
-        albumDao.save(album);
+        albumRepository.save(album);
     }
 
     @Override
     public void delete(Album album) {
-        albumDao.delete(album);
+        albumRepository.delete(album);
     }
 
     @Override
     public void updataNomeAlbum(Album album, String nome) {
         album.setNome(nome);
-        albumDao.save(album);
+        albumRepository.save(album);
     }
 }

@@ -1,59 +1,58 @@
 package com.piniscarlatti.siw.Service;
 
-import com.piniscarlatti.siw.Dao.FotografoDaoImpl;
 import com.piniscarlatti.siw.entity.Fotografo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.piniscarlatti.siw.repository.FotografoRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FotografoServiceImpl implements FotografoService {
 
-    @Autowired
-    FotografoDaoImpl fotografoDao;
+    FotografoRepository fotografoRepository;
 
     @Override
     public List<Fotografo> getAllFotografi() {
-        return fotografoDao.findAll();
+        return fotografoRepository.findAll();
     }
 
     @Override
     public List<Fotografo> getFotografiStartingWith(String nome) {
-        return fotografoDao.findFotografoStartingWith(nome,nome,nome);
+        return fotografoRepository.findByNomeContainsOrCognomeContainsOrEmailContains(nome,nome,nome);
     }
-
 
     @Override
     public Fotografo getFotografoById(Long id) {
-        return fotografoDao.findById(id);
+        return fotografoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Fotografo Id:" + id));
     }
 
     @Override
     public boolean fotografoExistsByEmail(String email) {
-        return fotografoDao.existsByEmail(email);
+        return fotografoRepository.existsByEmail(email);
     }
 
     @Override
     public boolean existsAnotherEmail(String email, Fotografo fotografoVecchio) {
-        return fotografoDao.existsAnotherEmail(email,fotografoVecchio);
+        return (fotografoRepository.existsByEmail(email)) && !fotografoVecchio.getEmail().equals(email);
     }
 
     @Override
     public void setAlbumAndSaveFotografo(Fotografo fotografo) {
         fotografo.setAlbumBase();
-        fotografoDao.save(fotografo);
+        fotografoRepository.save(fotografo);
     }
 
     @Override
     public void save(Fotografo fotografo) {
-        fotografoDao.save(fotografo);
+        fotografoRepository.save(fotografo);
     }
 
     @Override
     public void getFografoByIdAndDelete(Long id) {
-        Fotografo fotografo = fotografoDao.findById(id);
-        fotografoDao.delete(fotografo);
+        Fotografo fotografo = getFotografoById(id);
+        fotografoRepository.delete(fotografo);
     }
 }
