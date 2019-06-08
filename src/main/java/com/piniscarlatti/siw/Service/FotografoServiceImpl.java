@@ -42,6 +42,9 @@ public class FotografoServiceImpl implements FotografoService {
     @Override
     public void setAlbumAndSaveFotografo(Fotografo fotografo) {
         fotografo.setAlbumBase();
+        fotografo.setNome(fotografo.getNome().toUpperCase());
+        fotografo.setCognome(fotografo.getCognome().toUpperCase());
+        fotografo.setEmail(fotografo.getEmail().toUpperCase());
         fotografoRepository.save(fotografo);
     }
 

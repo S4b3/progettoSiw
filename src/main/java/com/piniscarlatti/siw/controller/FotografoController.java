@@ -25,7 +25,7 @@ public class FotografoController implements WebMvcConfigurer {
     //visualizza fotografi per iniziali
     @GetMapping("/{nome}")
     public String loadByInitial(@RequestParam("nome") String nome,Model model){
-        model.addAttribute("fotografi", fotografoService.getFotografiStartingWith(nome));
+        model.addAttribute("fotografi", fotografoService.getFotografiStartingWith(nome.toUpperCase()));
         return "visualizzaFotografi";
     }
     //Aggiunta di un fotografo
@@ -42,8 +42,15 @@ public class FotografoController implements WebMvcConfigurer {
             return "formFotografo";
         }
         fotografoService.setAlbumAndSaveFotografo(fotografo);
-        model.addAttribute("fotografi",fotografoService.getAllFotografi());
-        return "redirect:/photographers";
+        Long id = fotografo.getId();
+        return "redirect:/photographers/"+id+"/confirm";
+    }
+    //schermata di conferma
+    @GetMapping("/{id}/confirm")
+    public String confirm(@PathVariable("id")Long id,Model model){
+        Fotografo fotografo = fotografoService.getFotografoById(id);
+        model.addAttribute("fotografo",fotografo);
+        return "confermaFotografo";
     }
     //Cancellazione singolo fotografo
     @GetMapping("/{id}/delete")
@@ -67,8 +74,7 @@ public class FotografoController implements WebMvcConfigurer {
             return "modificaFotografo";
         }
         fotografoService.save(fotografo);
-        model.addAttribute("fotografi", fotografoService.getAllFotografi());
-        return "redirect:/photographers";
+        return "redirect:/photographers/"+id+"/confirm";
     }
     @GetMapping("/{id}/details")
     public String showDetails(@PathVariable("id")Long id,Model model){

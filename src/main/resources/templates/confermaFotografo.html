@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+NOME:
+<p th:text="${fotografo.nome}"></p>
+COGNOME:
+<p th:text="${fotografo.cognome}"></p>
+EMAIL:
+<p th:text="${fotografo.email}"></p>
+NUMERO ALBUM:
+<form>
+    <a th:href="@{/photographers}" class="btn btn-primary"> Conferma </a>
+    <a th:href="@{/photographers/{idF}/edit(idF=${fotografo.id})}"> Modifica </a>
+</form>
+</body>
+</html>
