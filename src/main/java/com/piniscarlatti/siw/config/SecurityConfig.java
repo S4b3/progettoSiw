@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //.accessDeniedPage("/loginerror")
                     .anyRequest().authenticated()
                     .and()
-                    .exceptionHandling().accessDeniedPage("/home.html")
+                    .exceptionHandling().accessDeniedPage("ciao")
                     .and()
                     .httpBasic();
     }
