@@ -3,7 +3,8 @@ HELP.md
 !.mvn/wrapper/maven-wrapper.jar
 
 ### Handmade ignores ###
-*.yml
+*.yaml
+*.properties
 
 ### STS ###
 .apt_generated
