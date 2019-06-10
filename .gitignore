@@ -5,6 +5,10 @@ HELP.md
 ### Handmade ignores ###
 *.yaml
 *.properties
+aws.properties
+*aws.properties
+.aws.properties
+.properties
 
 ### STS ###
 .apt_generated
