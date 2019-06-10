@@ -39,8 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //.exceptionHandling() //exception handling configuration
                     //.accessDeniedPage("/loginerror")
                     .anyRequest().authenticated()
-                    .and()
-                    .exceptionHandling().accessDeniedPage("ciao")
+                    //.and()
+                    //.exceptionHandling().accessDeniedPage("ciao")
                     .and()
                     .httpBasic();
     }
