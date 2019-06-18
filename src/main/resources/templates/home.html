@@ -9,8 +9,8 @@
     <p>Welcome to <span th:text="${appName}">Our App</span></p>
     <h1>This is Home page!</h1>
     <a style="color: blue" th:href="@{/gallery}">Gallery Page</a>
-    <a style="color: blue" th:href="@{/funzionario}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">
-        Funzionari's page
+    <a style="color: blue" th:href="@{/funzionario}" >
+        Login Funzionario
     </a>
     <th: sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">Mannaia la tvoia</th:>
 

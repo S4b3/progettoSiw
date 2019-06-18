@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,6 +23,7 @@ public class Foto {
     @Column(nullable = false)
     private String url;
 
+
     protected Foto() {
     }
 
@@ -30,6 +32,7 @@ public class Foto {
         this.categoria = categoria;
         this.album = album;
         this.url = url;
+
     }
 
     public Foto(String nome, String url) {

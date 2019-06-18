@@ -28,9 +28,10 @@ public class ImageStorageService {
     }
 
 
+
     public String storeImage(MultipartFile file) {
         AmazonS3 s3client = s3Service.getS3Client();
-        logger.info("Loggo il cazzo di client dentro storservice " + s3client.toString());
+        logger.info("Loggo il client dentro storservice " + s3client.toString());
         try {
             InputStream is = file.getInputStream();
             if(file.getSize()>MAX_SIZE)
