@@ -2,13 +2,11 @@ package com.piniscarlatti.siw.controller;
 
 import com.piniscarlatti.siw.entity.Foto;
 import com.piniscarlatti.siw.repository.FotoRepository;
-import com.piniscarlatti.siw.service.AmazonClient;
 import com.piniscarlatti.siw.service.ImageStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

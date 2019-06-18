@@ -4,7 +4,6 @@ import com.piniscarlatti.siw.entity.Fotografo;
 import com.piniscarlatti.siw.repository.FotografoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.piniscarlatti.siw.service.*;
 
 import java.util.List;
 
