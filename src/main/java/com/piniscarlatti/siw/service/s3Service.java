@@ -46,7 +46,7 @@ public class s3Service {
     }
 
     public AmazonS3 getS3Client(){
-        logger.info("Returno il cazzo di client : "+ this.s3client.toString());
+        logger.info("Returno il client : "+ this.s3client.toString());
         return s3client;
     }
 
@@ -66,8 +66,8 @@ public class s3Service {
             //get the property value and print it out
             this.accessKey = prop.getProperty("aws.access.key");
             this.secretKey = prop.getProperty("aws.access.secret");
-            this.endpointUrl = prop.getProperty("aws.endpoint.url");
-            this.bucketName = prop.getProperty("aws.bucket.name");
+            //this.endpointUrl = prop.getProperty("aws.endpoint.url");
+            //this.bucketName = prop.getProperty("aws.bucket.name");
 
         } catch (IOException ex) {
             ex.printStackTrace();

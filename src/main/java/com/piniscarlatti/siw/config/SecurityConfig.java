@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Sso
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -35,10 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/funzionario/**").hasRole("FUNZIONARIO")
-                    //.and()
-                    //.exceptionHandling() //exception handling configuration
-                    //.accessDeniedPage("/loginerror")
-                    .anyRequest().authenticated()
+                    .and()
+                    .exceptionHandling() //exception handling configuration
+                    .accessDeniedPage("/loginerror")
+                    //.anyRequest().authenticated()
                     //.and()
                     //.exceptionHandling().accessDeniedPage("ciao")
                     .and()
