@@ -1,7 +1,6 @@
 package com.piniscarlatti.siw.controller;
 
-import com.piniscarlatti.siw.persistenceService.OrdiniService;
-import com.piniscarlatti.siw.repository.OrdiniRepository;
+import com.piniscarlatti.siw.service.OrdiniService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

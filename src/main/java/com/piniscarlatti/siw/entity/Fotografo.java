@@ -9,13 +9,15 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Entity
 @Table(name = "fotografo")
 @Data
 @EqualsAndHashCode
-public class Fotografo implements Serializable {
+public class Fotografo implements Serializable,Comparable<Fotografo> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,4 +54,25 @@ public class Fotografo implements Serializable {
         this.album.put(generale.getId(), generale);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fotografo fotografo = (Fotografo) o;
+        return Objects.equals(id, fotografo.id) &&
+                Objects.equals(email, fotografo.email) &&
+                Objects.equals(nome, fotografo.nome) &&
+                Objects.equals(cognome, fotografo.cognome);
+    }
+
+    @Override
+    public int compareTo(Fotografo that) {
+
+        return this.getEmail().compareTo(that.getEmail());
+    }
+
+    public int getNumeroFoto(){
+        return album.entrySet().stream()
+                .map(i-> i.getValue().numeroFoto()).collect(Collectors.summingInt(Integer::intValue));
+    }
 }

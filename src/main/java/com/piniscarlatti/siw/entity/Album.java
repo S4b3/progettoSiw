@@ -38,9 +38,10 @@ public class Album implements Serializable {
     @Override
     public boolean equals(Object o) {
         Album that = (Album) o;
-        if (this.nome.equals(that.getNome()) && this.fotografo.equals(that.getFotografo())) {
-            return true;
-        }
-        return false;
+        return this.nome.equals(that.getNome()) && this.fotografo.equals(that.getFotografo());
+    }
+
+    public int numeroFoto(){
+        return this.fotografie.size();
     }
 }

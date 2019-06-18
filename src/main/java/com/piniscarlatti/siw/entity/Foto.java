@@ -24,7 +24,7 @@ public class Foto {
     private String url;
 
 
-    protected Foto() {
+    public Foto() {
     }
 
     public Foto(String nome, String categoria, Album album, String url) {

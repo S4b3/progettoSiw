@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
+    List<Album> findByFotografo(Fotografo fotografo);
 
-    public List<Album> findByFotografo(Fotografo fotografo);
-
-    public Album findByFotografo_IdAndId(Long idFotografo, Long idAlbum);
+    Album findByFotografo_IdAndId(Long idFotografo, Long idAlbum);
 }

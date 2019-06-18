@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<input type="button" value="Go back my friend" onclick="history.back()" class="btn btn-primary">
 <div class="container my-5" th:switch="${albums}">
     <div class="row">
         <div class="col-md-6">
@@ -32,7 +33,7 @@
                     <tr th:each="album : ${albums}">
                         <td th:text="${album.nome}"></td>
                         <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                        <td><a th:href="@{/gallery/photographers/edit/{id}(id=${album.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+                        <td><a th:href="@{/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
                         <td><a class="btn btn-primary" th:href="@{/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>
                     </tbody>

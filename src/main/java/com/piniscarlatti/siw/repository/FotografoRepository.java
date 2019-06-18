@@ -6,14 +6,10 @@ import com.piniscarlatti.siw.entity.Fotografo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface FotografoRepository extends JpaRepository<Fotografo, Long> {
 
-    List<Fotografo> findByNomeStartingWith(String nome);
-    List<Fotografo> findByNome(String nome);
+    List<Fotografo> findByNomeContainsOrCognomeContainsOrEmailContains(String nome,String nome1,String nome2);
     boolean existsByEmail(String email);
-
-
 
 }

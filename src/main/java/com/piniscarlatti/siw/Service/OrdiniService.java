@@ -1,4 +1,4 @@
-package com.piniscarlatti.siw.persistenceService;
+package com.piniscarlatti.siw.service;
 
 import com.piniscarlatti.siw.entity.Foto;
 import com.piniscarlatti.siw.entity.Ordine;
