@@ -9,4 +9,6 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     public List<Album> findByFotografo(Fotografo fotografo);
+
+    public Album findByFotografo_IdAndId(Long idFotografo, Long idAlbum);
 }

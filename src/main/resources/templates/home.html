@@ -3,16 +3,24 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Home</title>
+    <style>
+        .bottoni{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
 </head>
 <body>
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <p>Welcome to <span th:text="${appName}">Our App</span></p>
-    <h1>This is Home page!</h1>
-    <a style="color: blue" th:href="@{/gallery}">Gallery Page</a>
-    <a style="color: blue" th:href="@{/funzionario}" >
-        Login Funzionario
-    </a>
-    <th: sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">Mannaia la tvoia</th:>
+    <h1 th:color="blue"> HOMEPAGE </h1>
+    <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+    <div class = bottoni>
+        <a style= "margin : 0 4px 0; color: blue"  th:href="@{/gallery}">Gallery Page</a>
+        <a style=" margin : 0 4px 0; color: blue" th:href="@{/funzionario}" >
+            Zona Funzionari
+        </a>
+    </div>
+
+
 
 </body>
 </html>

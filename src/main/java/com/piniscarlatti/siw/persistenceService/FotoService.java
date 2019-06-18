@@ -20,6 +20,9 @@ public class FotoService implements FotoServiceInterface{
         fotoRepository.save(foto);
     }
 
+    public List<Foto> trovaFotoDaAlbum(Album album){
+        return fotoRepository.findByAlbum(album);
+    }
 
     @Override
     public void deleteFoto(Foto foto) {

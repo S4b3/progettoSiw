@@ -29,4 +29,8 @@ public class FotografoService implements FotografoServiceInteface {
     public void deleteAllFotografi() {
         fotografoRepository.deleteAll();
     }
+
+    public Fotografo perId(Long id){
+        return fotografoRepository.findById(id).get();
+    }
 }

@@ -45,4 +45,12 @@ public class AlbumService implements AlbumServiceInterface {
                 .map(i-> albumDaEliminare.add(i));
 
     }
+
+    public Album trovaDaFotografoPerId(Long idFotografo, Long idAlbum){
+        return albumRepository.findByFotografo_IdAndId(idFotografo, idAlbum);
+    }
+
+    public Album perId(Long id){
+        return albumRepository.findById(id).get();
+    }
 }
