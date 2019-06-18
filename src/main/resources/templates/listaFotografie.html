@@ -18,16 +18,16 @@
     </style>
 </head>
 <body>
-<div class="immaginiContainer">
-    <h2 th:case="null">No users yet!</h2>
-    <li th:each="fotografia : ${fotografie}">
-        <ul>
-            <div class="image">
-                <img alt="Image"
-                     th:src="${fotografia.url}">
-            </div>
-        </ul>
-    </li>
-</div>
+    <div class="immaginiContainer">
+        <h2 th:case="null">No users yet!</h2>
+        <li th:each="fotografia : ${fotografie}">
+            <ul>
+                <div class="image">
+                    <img alt="Image"
+                    th:src="${fotografia.url}">
+                </div>
+            </ul>
+        </li>
+    </div>
 </body>
 </html>

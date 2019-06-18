@@ -2,6 +2,9 @@ package com.piniscarlatti.siw.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -10,24 +13,25 @@ import javax.persistence.*;
 @EqualsAndHashCode
 public class Funzionario {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true, nullable = false)
+
+    @Column(nullable = false)
     private String username;
+
     @Column(nullable = false)
-    private String nome;
-    @Column(nullable = false)
-    private String cognome;
+    private String password;
 
-    protected Funzionario() {
-    }
+    private String role;
 
+    public Funzionario(){ }
 
-    public Funzionario(String nome, String cognome) {
-        this.nome = nome;
-        this.cognome = cognome;
-
+    public Funzionario(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.role = "FUNZIONARIO";
     }
 
 }

@@ -52,6 +52,7 @@ public class FotografoController implements WebMvcConfigurer {
         model.addAttribute("fotografo",fotografo);
         return "confermaFotografo";
     }
+
     //Cancellazione singolo fotografo
     @GetMapping("/{id}/delete")
     public String deletePhotographers(@PathVariable("id") Long id,Model model) {
