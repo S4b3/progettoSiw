@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -48,5 +49,16 @@ public class GalleryController implements WebMvcConfigurer {
         return "visualizzaFotografi";
     }
 
+    @GetMapping("/photo/{idPhoto}")
+    public String getFotoSingola(@PathVariable("idPhoto")Long id, Model model){
+        model.addAttribute("fotografia", fotoService.perId(id));
+        return "visualizzaSingolaFotoDettagli";
+    }
+
+    @GetMapping("/photo/buy/{idPhoto}")
+    public String addFotoToOrdine(@PathVariable("idPhoto")Long id, Model model){
+        return "";
+        //TODO: FAI STA COSA
+    }
 
 }

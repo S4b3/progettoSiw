@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        .dettagliFoto{
+            height: 90px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 align="center" class="gallery-title">Gallery</h1>
+        <div align="center">
+            <a class="btn btn-default filter-button"  th:href="@{/home}">Home</a>
+            <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
+            <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
+            <a class="btn btn-default filter-button"  th:href="@{/funzionario}">Funzionario</a>
+        </div>
+        <a class="btn btn-default filter-button"  th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}">Aggiungi Foto</a>
+        <br/>
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+                <img alt="Image"
+                         th:src="${fotografia.url}" width="800" height="800"></a>
+                <div class="dettagliFoto">
+                    <p>Nome : </p><span th:text="${fotografia.nome}"/>
+                    <p>Album : </p><span th:text= "${fotografia.album.nome} "></span>
+                    <p> Prezzo : </p><span th:text="${fotografia.prezzo}"/>
+                </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>

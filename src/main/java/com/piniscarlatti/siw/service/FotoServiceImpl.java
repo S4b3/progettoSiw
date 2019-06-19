@@ -25,4 +25,6 @@ public class FotoServiceImpl {
     public List<Foto> trovaTutte(){
         return fotoRepository.findAll();
     }
+
+    public Foto perId(Long id) { return fotoRepository.findById(id).get(); }
 }

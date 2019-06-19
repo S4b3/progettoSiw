@@ -22,16 +22,17 @@ public class Foto {
     private Album album;
     @Column(nullable = false)
     private String url;
-
+    private double prezzo;
 
     public Foto() {
     }
 
-    public Foto(String nome, String categoria, Album album, String url) {
+    public Foto(String nome, String categoria, Album album, String url, double prezzo) {
         this.nome = nome;
         this.categoria = categoria;
         this.album = album;
         this.url = url;
+        this.prezzo = prezzo;
 
     }
 

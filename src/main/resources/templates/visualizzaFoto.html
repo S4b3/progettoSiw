@@ -17,13 +17,13 @@
                 <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
                 <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
                 <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
-                <a class="btn btn-default filter-button"  th:href="@{/photographers/{idP}/album/{idA}/photo/addfoto(idP=${fotografo.id},idA=${album.id})}">Aggiungi Foto</a>
             </div>
+            <a class="btn btn-default filter-button"  th:href="@{/photographers/{idP}/album/{idA}/photo/addfoto(idP=${fotografo.id},idA=${album.id})}">Aggiungi Foto</a>
             <br/>
             <il th:each="fotografia : ${fotografie}">
                 <ul>
                     <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-                        <a th:href="@{/gallery}"><!--poi andrà l'indirizzo giusto-->
+                        <a th:href="@{/gallery/photo/{idPhoto}(idPhoto=${fotografia.id})}"><!--poi andrà l'indirizzo giusto-->
                         <img alt="Image"
                              th:src="${fotografia.url}" width="365" height="365"></a>
                     </div>

@@ -64,8 +64,8 @@ public class s3Service {
             //get the property value and print it out
             this.accessKey = prop.getProperty("aws.access.key");
             this.secretKey = prop.getProperty("aws.access.secret");
-            //this.endpointUrl = prop.getProperty("aws.endpoint.url");
-            //this.bucketName = prop.getProperty("aws.bucket.name");
+            this.endpointUrl = prop.getProperty("aws.endpoint.url");
+            this.bucketName = prop.getProperty("aws.bucket.name");
 
         } catch (IOException ex) {
             ex.printStackTrace();

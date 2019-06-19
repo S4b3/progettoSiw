@@ -22,7 +22,7 @@ public class FotoController {
     FotoServiceImpl fotoService;
     ImageStorageService imgStorage;
 
-    @GetMapping
+    @GetMapping("")
     public String visualizzaFotoAlbum(@PathVariable("idP")Long idP, @PathVariable("idA")Long idAlbum, Model model){
 
         Album album = albumService.perId(idAlbum);
@@ -41,13 +41,15 @@ public class FotoController {
         return "addfoto";
     }
 
-    @PostMapping
-    public String submit(@PathVariable("idP")Long idp, @PathVariable("idA")Long idA,@RequestParam("file") MultipartFile file,@Valid Foto foto){
+    @PostMapping("")
+    public String submit(@PathVariable("idP")Long idp, @PathVariable("idA")Long idA,
+                         @RequestParam("file") MultipartFile file,
+                         @Valid Foto foto){
         String url = imgStorage.storeImage(file);
         foto.setAlbum(albumService.getAlbumById(idA));
         foto.setUrl(url);
-        foto.setNome("prova");
         fotoService.salva(foto);
         return "redirect:/photographers/{idP}/album/{idA}/photo";
     }
+
 }
