@@ -36,6 +36,10 @@ public class FunzionarioDetails implements UserDetails {
         return this.funzionario.getUsername();
     }
 
+    public Long getId() {
+        return this.funzionario.getId();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

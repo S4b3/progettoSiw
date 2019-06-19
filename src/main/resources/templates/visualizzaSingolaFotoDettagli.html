@@ -35,6 +35,7 @@
                     <p>Nome : </p><span th:text="${fotografia.nome}"/>
                     <p>Album : </p><span th:text= "${fotografia.album.nome} "></span>
                     <p> Prezzo : </p><span th:text="${fotografia.prezzo}"/>
+                    <a th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}"> compra </a>
                 </div>
             </div>
     </div>

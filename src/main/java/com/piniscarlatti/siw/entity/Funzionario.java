@@ -24,6 +24,9 @@ public class Funzionario {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne
+    private Carrello carrello;
+
     private String role;
 
     public Funzionario(){ }
@@ -34,10 +37,24 @@ public class Funzionario {
         this.role = "FUNZIONARIO";
     }
 
+    public Funzionario(String username, String password,Carrello carrello) {
+        this.username = username;
+        this.password = password;
+        this.carrello = carrello;
+        this.role = "FUNZIONARIO";
+    }
+
     public Funzionario(String username, String password, String ruolo){
         this.username = username;
         this.password = password;
         this.role = ruolo;
+    }
+
+    public Funzionario(String username, String password, String ruolo,Carrello carrello){
+        this.username = username;
+        this.password = password;
+        this.role = ruolo;
+        this.carrello = carrello;
     }
 
 }
