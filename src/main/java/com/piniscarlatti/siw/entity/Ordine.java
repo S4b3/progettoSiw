@@ -14,7 +14,7 @@ public class Ordine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(mappedBy = "ordine")
+    @OneToOne
     private OrdineDettagli dettagli;
     private int prezzo;
 
