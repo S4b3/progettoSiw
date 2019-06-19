@@ -1,6 +1,6 @@
 package com.piniscarlatti.siw.config;
 
-import com.piniscarlatti.siw.service.FunzionarioDetailsService;
+import com.piniscarlatti.siw.service.LoggingDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    FunzionarioDetailsService funzionarioDetailsService;
+    LoggingDetailsService loggingDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth){
@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                     .authorizeRequests()
+                    .anyRequest().authenticated()
                     .antMatchers("/funzionario/**").hasRole("FUNZIONARIO")
                     .and()
                     .exceptionHandling() //exception handling configuration
@@ -46,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(this.funzionarioDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(this.loggingDetailsService);
 
         return daoAuthenticationProvider;
     }

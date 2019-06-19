@@ -16,4 +16,13 @@ public class Utente {
 
     @Column(nullable = false)
     private String password;
+
+    private String role;
+
+    public Utente(String username, String password){
+        this.username = username;
+        this.password = password;
+        this.role = "UTENTE";
+
+    }
 }
