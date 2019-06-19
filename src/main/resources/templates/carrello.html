@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 align="center" class="gallery-title">Carrello</h1>
+        <div align="center">
+            <a class="btn btn-default filter-button"  th:href="@{/home}">Home</a>
+            <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
+            <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
+            <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
+        </div>
+        <il th:each="fotografia : ${fotografie}">
+            <ul>
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+                    <a th:href="@{/gallery/photo/{idPhoto}(idPhoto=${fotografia.id})}"><!--poi andrà l'indirizzo giusto-->
+                        <img alt="Image"
+                             th:src="${fotografia.url}" width="365" height="365"></a>
+                </div>
+            </ul>
+        </il>
+
+    </div>
+</div>
+</body>
+</html>

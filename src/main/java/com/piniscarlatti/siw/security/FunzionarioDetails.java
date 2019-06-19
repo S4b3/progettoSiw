@@ -1,5 +1,6 @@
 package com.piniscarlatti.siw.security;
 
+import com.piniscarlatti.siw.entity.Carrello;
 import com.piniscarlatti.siw.entity.Funzionario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,6 +40,8 @@ public class FunzionarioDetails implements UserDetails {
     public Long getId() {
         return this.funzionario.getId();
     }
+
+    public Carrello getCarrello() { return this.funzionario.getCarrello();}
 
     @Override
     public boolean isAccountNonExpired() {

@@ -67,18 +67,12 @@ public class GalleryController implements WebMvcConfigurer {
 
     @GetMapping("/photo/buy/{idPhoto}")
     public String addFotoToOrdine(@PathVariable("idPhoto")Long id){
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long idFunzionario = ((FunzionarioDetails)principal).getId();
-        Funzionario funz = funzionarioService.perId(idFunzionario);
+        Funzionario funz = funzionarioService.funzionarioCorrente();
         Long idCarrello = funz.getCarrello().getId();
         if(carrelloService.esisteFotoNelCarrello(idCarrello,fotoService.perId(id))) {
-            Carrello carrello = carrelloService.perId(idCarrello);
-            carrello.setFotografia(fotoService.perId(id));
-            carrelloService.save(carrello);
+           carrelloService.salvaFotoNelCarrello(id,idCarrello);
         }
         return "redirect:/gallery";
-
     }
 
 }
