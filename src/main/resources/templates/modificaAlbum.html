@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
 <div class="float">
     <form class="form-horizontal" action="#" th:action="@{/photographers/{idF}/album/{idA}/update(idA=${album.getId()},idF=${album.getFotografo().getId()})}" th:object="${album}"
           method="post">
-        <fieldset>
-            <legend>Modifica Album</legend>
+    <fieldset>
+            <h1 align="center" >Modifica Album</h1>
             <div class="form-group">
                 <label class="col-md-4 control-label" >Nome</label>
                 <div class="col-md-4">
-                    <input name="textinput" type="text" placeholder="Nome" class="form-control input-md" required=""  th:field="*{nome} "  >
+                    <input name="textinput" type="text" placeholder="India 2018" class="form-control input-md" required=""  th:field="*{nome} "  >
+                    <td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</td>
                 </div>
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" ></label>
                 <div class="col-md-8">
-                    <button id="button1id" name="button1id" class="btn btn-success">Inserisci</button>
+                    <input type="submit" id="button1id" name="button1id" value="inserisci" class="btn btn-default filter-button">
                 </div>
             </div>
 

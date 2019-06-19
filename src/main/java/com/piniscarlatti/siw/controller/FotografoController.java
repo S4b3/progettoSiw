@@ -23,9 +23,9 @@ public class FotografoController implements WebMvcConfigurer {
         return "visualizzaFotografi";
     }
     //visualizza fotografi per iniziali
-    @GetMapping("/{nome}")
-    public String loadByInitial(@RequestParam("nome") String nome,Model model){
-        model.addAttribute("fotografi", fotografoService.getFotografiStartingWith(nome.toUpperCase()));
+    @GetMapping("/{value}")
+    public String loadByInitial(@RequestParam("value") String value,Model model){
+        model.addAttribute("fotografi", fotografoService.getFotografiStartingWith(value.toUpperCase()));
         return "visualizzaFotografi";
     }
     //Aggiunta di un fotografo

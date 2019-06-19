@@ -50,6 +50,9 @@ public class FotografoServiceImpl implements FotografoService {
 
     @Override
     public void save(Fotografo fotografo) {
+        fotografo.setNome(fotografo.getNome().toUpperCase());
+        fotografo.setCognome(fotografo.getCognome().toUpperCase());
+        fotografo.setEmail(fotografo.getEmail().toUpperCase());
         fotografoRepository.save(fotografo);
     }
 

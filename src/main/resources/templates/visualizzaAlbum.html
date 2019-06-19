@@ -8,14 +8,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/shards.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
-
-<input type="button" value="Go back my friend" onclick="history.back()" class="btn btn-primary">
+<div class="container">
+    <h1 align="center" class="gallery-title">Pini scarlatti</h1>
+    <div align="center">
+        <a class="btn btn-default filter-button"  th:href="@{/home}">Home</a>
+        <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
+        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
+        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
+    </div>
 <div class="container my-5" th:switch="${albums}">
     <div class="row">
         <div class="col-md-6">
-            <h2 th:case="null">No Albums yet!</h2>
             <div th:case="*">
                 <h2 class="my-5"> Album di
                     <td th:text="${fotografo.nome}"></td>
@@ -24,22 +30,19 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Foto</th>
-                        <th>Modifica</th>
-                        <th>Elimina</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="album : ${albums}">
                         <td th:text="${album.nome}"></td>
-                        <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                        <td><a th:href="@{/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-                        <td><a class="btn btn-primary" th:href="@{/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}"><i class="fas fa-user-times ml-2"></i></a></td>
+                        <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-default filter-button">Foto</a></td>
+                        <td><a th:href="@{/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
+                        <td><a th:href="@{/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="my-5"><a th:href="@{/photographers/{id}/album/add/(id=${fotografo.id})}" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+            <p class="my-5"><a th:href="@{/photographers/{id}/album/add/(id=${fotografo.id})}" class="btn btn-default filter-button">Aggiungi album</a></p>
         </div>
     </div>
 </div>

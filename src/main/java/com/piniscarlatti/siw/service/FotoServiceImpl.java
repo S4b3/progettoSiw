@@ -21,4 +21,8 @@ public class FotoServiceImpl {
     public void salva(Foto foto){
         fotoRepository.save(foto);
     }
+
+    public List<Foto> trovaTutte(){
+        return fotoRepository.findAll();
+    }
 }

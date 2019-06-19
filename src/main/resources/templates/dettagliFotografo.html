@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
-NOME:
-<p th:text="${fotografo.nome}"></p>
-COGNOME:
-<p th:text="${fotografo.cognome}"></p>
-EMAIL:
-<p th:text="${fotografo.email}"></p>
-NUMERO ALBUM:
-<p th:text="${fotografo.album.size()}"></p>
-NUMERO FOTO:
-<p th:text="${fotografo.getNumeroFoto()}"></p>
-<form>
-    <input type="button" value="Go back!" onclick="history.back()">
-</form>
+<div class="container my-5">
+    <div class="col-md-6">
+        <table class="table table-striped table-responsive-md" >
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Email</th>
+                <th>Numero Album</th>
+                <th>Numero Foto</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td th:text="${fotografo.nome}"></td>
+                <td th:text="${fotografo.cognome}"></td>
+                <td th:text="${fotografo.email}"></td>
+                <td th:text="${fotografo.album.size()}"></td>
+                <td th:text="${fotografo.getNumeroFoto()}"></td>
+                </tr>
+                <br>
+        <form>
+         <input class="btn btn-default filter-button" type="button" value="Go back!" onclick="history.back()">
+        </form>
+            </tbody>
+    </table>
+    </div>
+</div>
 </body>
 </html>
