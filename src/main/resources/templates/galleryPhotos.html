@@ -22,7 +22,7 @@
         <il th:each="fotografia : ${fotografie}">
             <ul>
                 <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-                    <a th:href="@{/gallery}"><!--poi andrà l'indirizzo giusto-->
+                    <a th:href="@{/gallery/photo/{idPhoto}(idPhoto=${fotografia.id})}"><!--poi andrà l'indirizzo giusto-->
                         <img alt="Image"
                              th:src="${fotografia.url}" width="365" height="365"></a>
                 </div>

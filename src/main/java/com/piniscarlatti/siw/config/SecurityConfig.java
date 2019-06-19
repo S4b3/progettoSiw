@@ -1,6 +1,6 @@
 package com.piniscarlatti.siw.config;
 
-import com.piniscarlatti.siw.service.LoggingDetailsService;
+import com.piniscarlatti.siw.service.FunzionarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    LoggingDetailsService loggingDetailsService;
+    FunzionarioDetailsService funzionarioDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth){
@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(this.loggingDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(this.funzionarioDetailsService);
 
         return daoAuthenticationProvider;
     }

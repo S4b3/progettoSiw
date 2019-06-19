@@ -34,4 +34,10 @@ public class Funzionario {
         this.role = "FUNZIONARIO";
     }
 
+    public Funzionario(String username, String password, String ruolo){
+        this.username = username;
+        this.password = password;
+        this.role = ruolo;
+    }
+
 }

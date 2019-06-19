@@ -23,8 +23,9 @@
         <li th:each="fotografia : ${fotografie}">
             <ul>
                 <div class="image">
-                    <img alt="Image"
-                    th:src="${fotografia.url}">
+                    <a th:href="@{/gallery/photo/{idPhoto}(idPhoto=${fotografia.id})}"><!--poi andrà l'indirizzo giusto-->
+                        <img alt="Image"
+                             th:src="${fotografia.url}" width="70%" height="70%"></a>
                 </div>
             </ul>
         </li>

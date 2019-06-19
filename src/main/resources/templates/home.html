@@ -15,7 +15,7 @@
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
     <div class = bottoni>
         <a style= "margin : 0 4px 0; color: blue"  th:href="@{/gallery}">Gallery Page</a>
-        <a style=" margin : 0 4px 0; color: blue" th:href="@{/funzionario}" >
+        <a style=" margin : 0 4px 0; color: blue" th:href="@{/funzionario}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">
             Zona Funzionari
         </a>
     </div>

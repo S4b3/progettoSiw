@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
             <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
             <a class="btn btn-default filter-button"  th:href="@{/funzionario}">Funzionario</a>
         </div>
-        <a class="btn btn-default filter-button"  th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}">Aggiungi Foto</a>
+        <a class="btn btn-default filter-button"  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}">Aggiungi Foto</a>
         <br/>
             <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
                 <img alt="Image"
