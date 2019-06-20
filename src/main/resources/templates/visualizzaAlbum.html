@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -43,8 +43,8 @@
                     <tr th:each="album : ${albums}">
                         <td th:text="${album.nome}"></td>
                         <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-default filter-button">Foto</a></td>
-                        <td><a th:href="@{/admin/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
-                        <td><a th:href="@{/admin/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
+                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/admin/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
+                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/admin/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
                     </tr>
                     </tbody>
                 </table>
