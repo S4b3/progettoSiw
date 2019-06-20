@@ -13,9 +13,16 @@
 <body>
     <h1 th:color="blue"> HOMEPAGE </h1>
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+    <h3>Benvenuto nel progetto per Sistemi Informativi sul Web!</h3>
+    <h3>Membri del team : </h3>
+    <div>
+        <p>Valentino Sacco [507966]</p>
+        <p>Leonardo Sano [488242]</p>
+        <p>Giulia Cattaneo [509563]</p>
+    </div>
     <div class = bottoni>
-        <a style= "margin : 0 4px 0; color: blue"  th:href="@{/gallery}">Gallery Page</a>
-        <a style=" margin : 0 4px 0; color: blue" th:href="@{/funzionario}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">
+        <a style= "margin : 0 4px 0; color: blue"  th:href="@{/gallery}">Inizia a visualizzare il progetto!git s</a>
+        <a style=" margin : 0 4px 0; color: blue" th:href="@{/admin/ordini}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">
             Zona Funzionari
         </a>
     </div>

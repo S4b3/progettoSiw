@@ -28,8 +28,13 @@ public class ProjectController {
     OrdiniService ordiniService;
     FotoServiceImpl fotoService;
 
+    @GetMapping("/")
+    public String getIndexGallery(){
+        return "redirect:/gallery";
+    }
+
     @GetMapping("/home")
-    public String getHome(){
+    public String getHomePage(){
         return "home";
     }
 
@@ -48,7 +53,7 @@ public class ProjectController {
     public String confermaOrdine(@Valid Ordine ordine, @PathVariable("idCarrello")Long idCarrello){
         Carrello carrello = this.carrelloService.perId(idCarrello);
         ordine.setUsernameUtente(this.funzionarioService.funzionarioCorrente().getUsername());
-        ordine.setPrezzo(carrello.getSubTotolal());
+        ordine.setPrezzo(carrello.getSubTotal());
         for(Foto f:fotoService.trovaTutte()){
             ordine.setFotografia(fotoService.perId(f.getId()));
         }

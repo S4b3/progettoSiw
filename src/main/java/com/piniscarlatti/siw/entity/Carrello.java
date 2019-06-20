@@ -18,8 +18,6 @@ public class Carrello {
     @ManyToMany
     private List<Foto> fotografie;
 
-    private double subTotolal;
-
     public double getSubTotal(){
         return fotografie.stream()
                 .map(i-> i.getPrezzo()).collect(Collectors.summingDouble(Double::doubleValue));

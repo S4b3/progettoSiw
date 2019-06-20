@@ -18,7 +18,7 @@
         <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
         <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
         <a class="btn btn-default filter-button"  th:href="@{/carrello}">Carrello</a>
-        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
+        <a class="btn btn-default filter-button"  th:href="@{/admin/ordini}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">Ordini</a>
     </div>
     <div class="container my-5" th:switch="${ordini}">
         <div class="row">
@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="ordine : ${ordini}">
-                            <td th:text="${ordine.id}"></td>
+                            <a th:href="@{/{id}/fotografie(id=${ordine.id})}"><td th:text="${ordine.id}"></td></a>
                             <td th:text="${ordine.usernameUtente}"></td>
                             <td th:text="${ordine.email}"></td>
                             <td th:text="${ordine.fotografie.size()}"></td>

@@ -18,7 +18,7 @@
         <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
         <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
         <a class="btn btn-default filter-button"  th:href="@{/carrello}">Carrello</a>
-        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
+        <a class="btn btn-default filter-button"  th:href="@{/admin/ordini}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">Ordini</a>
     </div>
 <div class="container my-5" th:switch="${albums}">
     <form th:action="@{/photographers/{idF}/album/{value}(idF=${fotografo.id})}" method="get" class="form-inline">
