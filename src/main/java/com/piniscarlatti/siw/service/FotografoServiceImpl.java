@@ -47,7 +47,6 @@ public class FotografoServiceImpl implements FotografoService {
 
     @Override
     public void setAlbumAndSaveFotografo(Fotografo fotografo) {
-        fotografo.setAlbumBase();
         fotografo.setNome(fotografo.getNome().toUpperCase());
         fotografo.setCognome(fotografo.getCognome().toUpperCase());
         fotografo.setEmail(fotografo.getEmail().toUpperCase());
@@ -66,6 +65,43 @@ public class FotografoServiceImpl implements FotografoService {
     public void getFografoByIdAndDelete(Long id) {
         Fotografo fotografo = getFotografoById(id);
         fotografoRepository.delete(fotografo);
+    }
+
+    public boolean ciSonoFotoAlbumInOrdini(Long id, Long idAlbum){
+        List<Ordine> ordini = ordiniService.tutti();
+        List<Album> albums = new ArrayList<>();
+        albums.add(albumService.getAlbumById(idAlbum));
+        List<Foto> fotoDelFotografo = new ArrayList<>();
+        //fotoDelFotografo = albums.stream().map(i -> fotoService.trovaTutteDaAlbum(albumService.getAlbumById(i.getId()))).collect(Collectors.toList());
+        for(Album a:albums){
+            fotoDelFotografo.addAll(fotoService.trovaTutteDaAlbum(albumService.perId(a.getId())));
+        }
+        List<Foto> fotoDegliOrdini = new ArrayList<>(fotoService.trovaTutteDaOrdine(ordini));
+        for(Foto f: fotoDelFotografo){
+            if(fotoDegliOrdini.contains(fotoService.perId(f.getId()))){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean ciSonoFotoAlbumInCarrelli(Long id, Long idAlbum){
+        List<Carrello> carrelli = carrelloService.tutti();
+        List<Foto> tutteLeFotoNeiCarrelli = new ArrayList<>();
+        for(Carrello c : carrelli){
+            tutteLeFotoNeiCarrelli.addAll(c.getFotografie());
+        }
+        List<Foto> tutteLeFotoNelleOrdinazioni = new ArrayList<>();
+        for(Ordine o : ordiniService.tutti()){
+            tutteLeFotoNelleOrdinazioni.addAll(o.getFotografie());
+        }
+        for(Foto f : albumService.getAlbumById(idAlbum).getFotografie().values()){
+            if(tutteLeFotoNeiCarrelli.contains(f) || tutteLeFotoNelleOrdinazioni.contains(f)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -88,20 +124,26 @@ public class FotografoServiceImpl implements FotografoService {
     }
 
     @Override
-    public boolean ciSonoFotoInCarrelli(Long id) {
+    public boolean ciSonoFotoInCarrelli(Long id){
         List<Carrello> carrelli = carrelloService.tutti();
-        List<Album> albums = albumService.getAlbumsByFotografo(this.getFotografoById(id));
-        List<Foto> fotoDelFotografo = new ArrayList<>();
-        //fotoDelFotografo = albums.stream().map(i -> fotoService.trovaTutteDaAlbum(albumService.getAlbumById(i.getId()))).collect(Collectors.toList());
-        for(Album a:albums){
-            fotoDelFotografo.addAll(fotoService.trovaTutteDaAlbum(albumService.perId(a.getId())));
+        List<Foto> tutteLeFotoNeiCarrelli = new ArrayList<>();
+        for(Carrello c : carrelli){
+            tutteLeFotoNeiCarrelli.addAll(c.getFotografie());
         }
-        List<Foto> fotoDeiCarrelli = new ArrayList<>(fotoService.trovaTutteDaCarrelli(carrelli));
-        for(Foto f: fotoDelFotografo){
-            if(fotoDeiCarrelli.contains(fotoService.perId(f.getId()))){
+        List<Foto> tutteLeFotoNelleOrdinazioni = new ArrayList<>();
+        for(Ordine o : ordiniService.tutti()){
+            tutteLeFotoNelleOrdinazioni.addAll(o.getFotografie());
+        }
+        List<Foto> tutteLeFotoNegliAlbumDelFotografo = new ArrayList<>();
+        for(Album a : albumService.getAlbumsByFotografo(this.getFotografoById(id))){
+            tutteLeFotoNegliAlbumDelFotografo.addAll(a.getFotografie().values());
+        }
+        for(Foto f : tutteLeFotoNegliAlbumDelFotografo){
+            if(tutteLeFotoNeiCarrelli.contains(f) || tutteLeFotoNelleOrdinazioni.contains(f)){
                 return true;
             }
         }
         return false;
     }
+
 }

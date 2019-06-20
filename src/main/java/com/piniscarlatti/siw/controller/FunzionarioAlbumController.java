@@ -42,10 +42,12 @@ public class FunzionarioAlbumController implements WebMvcConfigurer {
 
     //photographers/{id}/album/{idAlbum}/delete
     @GetMapping("/{idAlbum}/delete")
-    public String deletePhotographers(@PathVariable("id") Long id, @PathVariable("idAlbum") Long idAlbum, Model model) {
+    public String deleteAlbum(@PathVariable("id") Long id, @PathVariable("idAlbum") Long idAlbum, Model model) {
         Fotografo fotografo = fotografoService.getFotografoById(id);
         Album album = albumService.getAlbumById(idAlbum);
-        albumService.delete(album);
+        if(!fotografoService.ciSonoFotoAlbumInOrdini(id,idAlbum) && !fotografoService.ciSonoFotoAlbumInCarrelli(id,idAlbum)) {
+            albumService.delete(album);
+        }
         model.addAttribute("albums", albumService.getAlbumsByFotografo(fotografo));
         return "redirect:/photographers/{id}/album";
     }

@@ -19,6 +19,7 @@
         <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
         <a class="btn btn-default filter-button"  th:href="@{/carrello}">Carrello</a>
         <a class="btn btn-default filter-button"  th:href="@{/admin/ordini}" sec:authorize="hasAuthority('ROLE_FUNZIONARIO')">Ordini</a>
+        <a class="btn btn-default filter-button"  th:href="@{/logout}">Logout</a>
     </div>
     <div class="container my-5" th:switch="${ordini}">
         <div class="row">
