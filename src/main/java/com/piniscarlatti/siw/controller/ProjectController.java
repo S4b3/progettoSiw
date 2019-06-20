@@ -29,8 +29,8 @@ public class ProjectController {
     FotoServiceImpl fotoService;
 
     @GetMapping("/")
-    public String getIndexGallery(){
-        return "redirect:/gallery";
+    public String getIndex(){
+        return "home";
     }
 
     @GetMapping("/home")
