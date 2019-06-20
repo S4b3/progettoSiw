@@ -52,6 +52,7 @@ public class ProjectController {
         for(Foto f:fotoService.trovaTutte()){
             ordine.setFotografia(fotoService.perId(f.getId()));
         }
+        carrelloService.svuota(idCarrello);
         ordiniService.salva(ordine);
         return "redirect:/gallery";
     }

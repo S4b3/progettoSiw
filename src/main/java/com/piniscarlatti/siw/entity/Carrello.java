@@ -15,8 +15,7 @@ public class Carrello {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "carrello_id")
+    @ManyToMany
     private List<Foto> fotografie;
 
     private double subTotolal;

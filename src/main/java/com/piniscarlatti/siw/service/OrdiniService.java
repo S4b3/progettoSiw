@@ -32,5 +32,8 @@ public class OrdiniService {
         this.ordiniRepository.save(o);
     }
 
+    public List<Ordine> tutti(){
+        return ordiniRepository.findAll();
+    }
 
 }

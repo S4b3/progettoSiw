@@ -13,5 +13,6 @@ public interface FotografoService {
     void setAlbumAndSaveFotografo(Fotografo fotografo);
     void save(Fotografo fotografo);
     void getFografoByIdAndDelete(Long id);
-
+    boolean ciSonoFotoInOrdini(Long id);
+    boolean ciSonoFotoInCarrelli(Long id);
 }

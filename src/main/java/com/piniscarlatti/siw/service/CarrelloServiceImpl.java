@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,6 +47,18 @@ public class CarrelloServiceImpl implements CarrelloService{
         Long idCarrello = ((FunzionarioDetails)principal).getCarrello().getId();
         Carrello carrello = this.perId(idCarrello);
         return carrello.getFotografie();
+    }
+
+    @Override
+    public void svuota(Long id) {
+        List<Foto> fotos = new ArrayList<>(this.tutteLeFoto());
+        Carrello carrello = this.perId(id);
+        carrello.getFotografie().removeAll(fotos);
+    }
+
+    @Override
+    public List<Carrello> tutti() {
+        return carrelloRepository.findAll();
     }
 
 

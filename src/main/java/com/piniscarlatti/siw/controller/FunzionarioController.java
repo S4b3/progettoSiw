@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/funzionario")
+@RequestMapping("/admin")
 public class FunzionarioController {
 
     @Autowired
     private OrdiniService ordiniService;
 
-    @GetMapping
+    @GetMapping("/ordini")
     public String getFunzionario(Model model){
         model.addAttribute("ordini", ordiniService.getAll());
         return "funzionario";

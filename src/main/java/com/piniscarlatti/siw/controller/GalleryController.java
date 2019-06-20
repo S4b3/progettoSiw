@@ -31,10 +31,10 @@ import javax.servlet.http.HttpServletRequest;
 @AllArgsConstructor
 public class GalleryController implements WebMvcConfigurer {
 
-    private FotografoRepository fotografoRepository;
     private FotoServiceImpl fotoService;
     private FunzionarioServiceImpl funzionarioService;
     private CarrelloServiceImpl carrelloService;
+    private CarrelloRepository carrelloRepository;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -47,17 +47,6 @@ public class GalleryController implements WebMvcConfigurer {
         return "galleryPhotos";
     }
 
-    //Cancellazione di tutti i fotografi dal db
-    @GetMapping("/deletephotographers")
-    public String showDeleteButton(){
-        return "deleteFotografo";
-    }
-
-    @PostMapping("/deletephotographers")
-    public  String deleteAllFotografi() {
-        fotografoRepository.deleteAll();
-        return "visualizzaFotografi";
-    }
 
     @GetMapping("/photo/{idPhoto}")
     public String getFotoSingola(@PathVariable("idPhoto")Long id, Model model){

@@ -11,4 +11,6 @@ public interface CarrelloService {
     Boolean esisteFotoNelCarrello(Long id,Foto foto);
     void salvaFotoNelCarrello(Long idFoto,Long idCarrello);
     List<Foto> tutteLeFoto();
+    void svuota(Long id);
+    List<Carrello> tutti();
 }

@@ -24,6 +24,8 @@ public class Foto {
     private String url;
     @ManyToMany(mappedBy = "fotografie")
     private List<Ordine> ordini;
+    @ManyToMany(mappedBy = "fotografie")
+    private List<Carrello> carrelli;
     private double prezzo;
 
     public Foto() {

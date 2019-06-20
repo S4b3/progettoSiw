@@ -51,8 +51,9 @@ public class FunzionarioFotografoController implements WebMvcConfigurer {
     //Cancellazione singolo fotografo
     @GetMapping("/{id}/delete")
     public String deletePhotographers(@PathVariable("id") Long id, Model model) {
-        fotografoService.getFografoByIdAndDelete(id);
-        model.addAttribute("fotografi", fotografoService.getAllFotografi());
+        if(!fotografoService.ciSonoFotoInOrdini(id) && !fotografoService.ciSonoFotoInCarrelli(id)) {
+            fotografoService.getFografoByIdAndDelete(id);
+        }
         return "redirect:/photographers";
     }
 
