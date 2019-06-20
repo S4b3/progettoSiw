@@ -17,8 +17,6 @@ import java.util.Properties;
 @Service
 public class s3Service {
 
-    private static final Logger logger = LoggerFactory.getLogger("logger");
-
     private AWSCredentials credentials;
 
     private AmazonS3 s3client;
@@ -34,17 +32,13 @@ public class s3Service {
     public s3Service() {
         setProperties();
         this.credentials = new BasicAWSCredentials(accessKey, secretKey);
-        logger.info("Credentials : " + credentials.getAWSAccessKeyId() + " " + credentials.getAWSSecretKey());
         this.s3client  = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(Regions.EU_CENTRAL_1)
                 .build();
-
-        logger.info(s3client.toString());
     }
 
     public AmazonS3 getS3Client(){
-        logger.info("Returno il client : "+ this.s3client.toString());
         return s3client;
     }
 
