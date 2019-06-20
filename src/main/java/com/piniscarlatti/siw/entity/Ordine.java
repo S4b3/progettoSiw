@@ -3,6 +3,7 @@ package com.piniscarlatti.siw.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,14 +15,25 @@ public class Ordine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    private OrdineDettagli dettagli;
     private double prezzo;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String usernameUtente;
 
-    public Ordine(OrdineDettagli odett, double prezzo, List<Foto> fotografie){
-        this.dettagli = odett;
-        this.prezzo = prezzo;
+    public Ordine(){
+        this.fotografie = new ArrayList<>();
+    }
+
+    public Ordine(List<Foto> fotografie, double prezzo, String email, String usernameUtente) {
         this.fotografie = fotografie;
+        this.prezzo = prezzo;
+        this.email = email;
+        this.usernameUtente = usernameUtente;
+    }
+
+    public void setFotografia(Foto foto){
+        this.fotografie.add(foto);
     }
 
 }

@@ -22,6 +22,8 @@ public class Foto {
     private Album album;
     @Column(nullable = false)
     private String url;
+    @ManyToMany(mappedBy = "fotografie")
+    private List<Ordine> ordini;
     private double prezzo;
 
     public Foto() {

@@ -19,9 +19,6 @@ public class Carrello {
     @JoinColumn(name = "carrello_id")
     private List<Foto> fotografie;
 
-    @OneToOne
-    private Funzionario funzionario;
-
     private double subTotolal;
 
     public double getSubTotal(){

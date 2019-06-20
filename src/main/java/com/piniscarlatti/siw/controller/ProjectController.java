@@ -26,7 +26,7 @@ public class ProjectController {
     PasswordEncoder pwd;
     CarrelloServiceImpl carrelloService;
     OrdiniService ordiniService;
-    OrdineDettagliService ordineDettagliService;
+    FotoServiceImpl fotoService;
 
     @GetMapping("/home")
     public String getHome(){
@@ -36,7 +36,7 @@ public class ProjectController {
     @GetMapping("/carrello")
     public String Carrello(Model model){
         Carrello carrello = funzionarioService.funzionarioCorrente().getCarrello();
-        model.addAttribute("dettagliOrdine", new OrdineDettagli());
+        model.addAttribute("dettagliOrdine", new Ordine());
         model.addAttribute("utente", funzionarioService.funzionarioCorrente());
         model.addAttribute("fotografie",carrelloService.tutteLeFoto());
         model.addAttribute("carrello",carrello);
@@ -45,17 +45,16 @@ public class ProjectController {
     }
 
     @PostMapping("/orderConfirm/{idCarrello}")
-    public String confermaOrdine(@Valid OrdineDettagli oDett, @PathVariable("idCarrello")Long idCarrello, Model model){
+    public String confermaOrdine(@Valid Ordine ordine, @PathVariable("idCarrello")Long idCarrello){
         Carrello carrello = this.carrelloService.perId(idCarrello);
-        oDett.setUsernameUtente(this.funzionarioService.funzionarioCorrente().getUsername());
-        List<Foto> fotografie = carrello.getFotografie();
-        Ordine ordine = new Ordine(oDett, carrello.getSubTotal(), fotografie);
-        ordineDettagliService.salva(oDett);
+        ordine.setUsernameUtente(this.funzionarioService.funzionarioCorrente().getUsername());
+        ordine.setPrezzo(carrello.getSubTotolal());
+        for(Foto f:fotoService.trovaTutte()){
+            ordine.setFotografia(fotoService.perId(f.getId()));
+        }
         ordiniService.salva(ordine);
         return "redirect:/gallery";
     }
-
-
 
     @RequestMapping("user")
     @ResponseBody
