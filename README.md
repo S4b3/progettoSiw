@@ -21,3 +21,6 @@ inoltre potrà accedere a tutti gli ordini effettuati dai clienti
 + Amazon s3
 + Spring Security
 + Thymeleaf
+
+##### Info utili
++ Per poter usufruire dell'applicazione è necessario installare Lombok su sts o scaricare il plugin se si utilizza Intellij
