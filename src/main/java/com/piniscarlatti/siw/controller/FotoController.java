@@ -1,15 +1,18 @@
 package com.piniscarlatti.siw.controller;
+
 import com.piniscarlatti.siw.entity.Album;
 import com.piniscarlatti.siw.entity.Foto;
-import com.piniscarlatti.siw.service.*;
+import com.piniscarlatti.siw.service.AlbumServiceImpl;
+import com.piniscarlatti.siw.service.FotoServiceImpl;
+import com.piniscarlatti.siw.service.FotografoService;
+import com.piniscarlatti.siw.service.ImageStorageService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
 @Controller
@@ -31,25 +34,6 @@ public class FotoController {
         model.addAttribute("album", album);
         model.addAttribute("fotografie", fotografie);
         return "visualizzaFoto";
-    }
-
-    @GetMapping("/addfoto")
-    public String addfoto(@PathVariable("idP")Long idp, @PathVariable("idA")Long idA,Model model){
-        model.addAttribute("album",albumService.getAlbumById(idA));
-        model.addAttribute("fotografo",fotografoService.getFotografoById(idp));
-        model.addAttribute("foto",new Foto());
-        return "addfoto";
-    }
-
-    @PostMapping("")
-    public String submit(@PathVariable("idP")Long idp, @PathVariable("idA")Long idA,
-                         @RequestParam("file") MultipartFile file,
-                         @Valid Foto foto){
-        String url = imgStorage.storeImage(file);
-        foto.setAlbum(albumService.getAlbumById(idA));
-        foto.setUrl(url);
-        fotoService.salva(foto);
-        return "redirect:/photographers/{idP}/album/{idA}/photo";
     }
 
 }

@@ -4,7 +4,7 @@
     <title>foto form</title>
 </head>
 <body>
-    <form method="POST" th:action="@{/photographers/{idP}/album/{idA}/photo(idP=${fotografo.id},idA=${album.id})}" th:object="${foto}" enctype="multipart/form-data">
+    <form method="POST" th:action="@{/admin/photographers/{idP}/album/{idA}/photo(idP=${fotografo.id},idA=${album.id})}" th:object="${foto}" enctype="multipart/form-data">
 
         <fieldset>
             <h1 align="center" >Inserisci Foto</h1>

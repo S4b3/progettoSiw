@@ -19,7 +19,7 @@
                 <a class="btn btn-default filter-button"  th:href="@{/carrello}">Carrello</a>
                 <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
             </div>
-            <a class="btn btn-default filter-button"  th:href="@{/photographers/{idP}/album/{idA}/photo/addfoto(idP=${fotografo.id},idA=${album.id})}">Aggiungi Foto</a>
+            <a class="btn btn-default filter-button"  th:href="@{/admin/photographers/{idP}/album/{idA}/photo/addfoto(idP=${fotografo.id},idA=${album.id})}">Aggiungi Foto</a>
             <br/>
             <il th:each="fotografia : ${fotografie}">
                 <ul>

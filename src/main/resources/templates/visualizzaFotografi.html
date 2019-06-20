@@ -47,13 +47,13 @@
                         <td th:text="${fotografo.cognome}"></td>
                         <td><a th:href="@{/photographers/{id}/album(id=${fotografo.id})}" class="btn btn-default filter-button">Album</a></td>
                         <td><a  th:href="@{/photographers/{id}/details(id=${fotografo.id})}" class="btn btn-default filter-button">Dettagli</a></td>
-                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/photographers/{id}/delete(id=${fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
-                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/photographers/{id}/edit(id=${fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
+                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/admin/photographers/{id}/delete(id=${fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
+                        <td><a  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/admin/photographers/{id}/edit(id=${fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <a sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" href="/photographers/add" class="btn btn-default filter-button">Aggiungi fotografo</a>
+            <a sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" href="/admin/photographers/add" class="btn btn-default filter-button">Aggiungi fotografo</a>
             <a href="/logout" method="POST" class="btn btn-default filter-button">Logout </a>
         </div>
     </div>

@@ -42,13 +42,13 @@
                     <tr th:each="album : ${albums}">
                         <td th:text="${album.nome}"></td>
                         <td><a th:href="@{/photographers/{idP}/album/{idA}/photo(idA=${album.id},idP=${album.fotografo.id})}" class="btn btn-default filter-button">Foto</a></td>
-                        <td><a th:href="@{/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
-                        <td><a th:href="@{/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
+                        <td><a th:href="@{/admin/photographers/{idF}/album/{idA}/edit(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Modifica</a></td>
+                        <td><a th:href="@{/admin/photographers/{idF}/album/{idA}/delete(idA=${album.id},idF=${album.fotografo.id})}" class="btn btn-default filter-button">Elimina</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="my-5"><a th:href="@{/photographers/{id}/album/add/(id=${fotografo.id})}" class="btn btn-default filter-button">Aggiungi album</a></p>
+            <p class="my-5"><a th:href="@{/admin/photographers/{id}/album/add/(id=${fotografo.id})}" class="btn btn-default filter-button">Aggiungi album</a></p>
         </div>
     </div>
 </div>

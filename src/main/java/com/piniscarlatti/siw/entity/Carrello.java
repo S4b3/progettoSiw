@@ -16,6 +16,7 @@ public class Carrello {
     private Long id;
 
     @OneToMany
+    @JoinColumn(name = "carrello_id")
     private List<Foto> fotografie;
 
     @OneToOne

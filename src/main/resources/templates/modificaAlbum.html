@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="float">
-    <form class="form-horizontal" action="#" th:action="@{/photographers/{idF}/album/{idA}/update(idA=${album.getId()},idF=${album.getFotografo().getId()})}" th:object="${album}"
+    <form class="form-horizontal" action="#" th:action="@{/admin/photographers/{idF}/album/{idA}/update(idA=${album.getId()},idF=${album.getFotografo().getId()})}" th:object="${album}"
           method="post">
     <fieldset>
             <h1 align="center" >Modifica Album</h1>

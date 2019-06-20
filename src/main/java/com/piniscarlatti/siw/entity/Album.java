@@ -18,7 +18,7 @@ public class Album implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     @MapKey(name = "id")
     private Map<Long, Foto> fotografie;
     @ManyToOne
