@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class OrdineDettagliService {
+public class OrdineDettagliService implements OrdineDettagliServiceInterface {
 
     OrdineDettagliRepository ordineDettagliRepository;
 
+    @Override
     public void salva(OrdineDettagli o){
         ordineDettagliRepository.save(o);
     }

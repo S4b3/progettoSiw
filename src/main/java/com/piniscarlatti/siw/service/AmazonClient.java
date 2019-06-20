@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Date;
 
 //@service
-public class AmazonClient {
+public class AmazonClient implements AmazonClientInterface {
 
     private static final Logger logger = LoggerFactory.getLogger("logger");
 
@@ -75,6 +75,7 @@ public class AmazonClient {
                 .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
+    @Override
     public String uploadFile(MultipartFile multipartFile) {
 
         String fileUrl = "";
@@ -90,6 +91,7 @@ public class AmazonClient {
         }
         return fileUrl;
     }
+    @Override
     public String deleteFileFromS3Bucket(String fileUrl) {
         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
         s3client.deleteObject(new DeleteObjectRequest(bucketName + "/", fileName));
