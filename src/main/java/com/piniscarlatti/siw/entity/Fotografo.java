@@ -41,15 +41,12 @@ public class Fotografo implements Serializable,Comparable<Fotografo> {
         this.cognome = cognome;
         this.email = email;
         this.album = new HashMap<>();
-        Album generale = new Album("Tutte le foto", this);
-        this.album.put(generale.getId(), generale);
     }
 
     public Fotografo() {
     }
 
     public void setAlbumBase(){
-        this.album = new HashMap<>();
         Album generale = new Album("Tutte le foto", this);
         this.album.put(generale.getId(), generale);
     }

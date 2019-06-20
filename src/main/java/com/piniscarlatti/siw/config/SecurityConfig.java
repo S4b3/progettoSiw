@@ -29,16 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                     .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("FUNZIONARIO")
+                    .antMatchers("/admin/**").hasRole("FUNZIONARIO")
                     .anyRequest().authenticated()
                     .and().formLogin()
                     .defaultSuccessUrl("/home")
                     .and().logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/");
-                    //.anyRequest().authenticated()
-                    //.and()
-                    //.exceptionHandling().accessDeniedPage("ciao")
     }
 
     @Bean
