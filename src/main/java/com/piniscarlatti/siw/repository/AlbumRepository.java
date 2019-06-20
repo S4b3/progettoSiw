@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
     List<Album> findByFotografo(Fotografo fotografo);
-
+    List<Album> findByFotografoAndNomeContains(Fotografo fotografo,String nome);
     Album findByFotografo_IdAndId(Long idFotografo, Long idAlbum);
 }

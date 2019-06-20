@@ -8,10 +8,7 @@ import com.piniscarlatti.siw.service.AlbumServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.validation.Valid;
 
@@ -30,6 +27,13 @@ public class AlbumController implements WebMvcConfigurer {
         Fotografo fotografo = fotografoService.getFotografoById(id);
         model.addAttribute("albums", albumService.getAlbumsByFotografo(fotografo));
         model.addAttribute("fotografo", fotografo);
+        return "visualizzaAlbum";
+    }
+    //visualizza fotografi per iniziali
+    @GetMapping("/{value}")
+    public String loadByInitial(@RequestParam("value") String value,@PathVariable("id") Long id, Model model){
+        model.addAttribute("albums", albumService.getAlbumsByTitolo(fotografoService.getFotografoById(id),value.toUpperCase()));
+        model.addAttribute("fotografo",fotografoService.getFotografoById(id));
         return "visualizzaAlbum";
     }
     //aggiunta di un album

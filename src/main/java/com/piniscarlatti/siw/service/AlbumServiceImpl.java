@@ -31,6 +31,11 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    public List<Album> getAlbumsByTitolo(Fotografo fotografo,String nome) {
+        return albumRepository.findByFotografoAndNomeContains(fotografo,nome);
+    }
+
+    @Override
     public void save(Album album) {
         albumRepository.save(album);
     }
@@ -38,6 +43,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public void setFotografoAndSaveAlbum(Album album,Fotografo fotografo) {
         album.setFotografo(fotografo);
+        album.setNome(album.getNome().toUpperCase());
         albumRepository.save(album);
     }
 
@@ -48,7 +54,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public void updataNomeAlbum(Album album, String nome) {
-        album.setNome(nome);
+        album.setNome(nome.toUpperCase());
         albumRepository.save(album);
     }
 

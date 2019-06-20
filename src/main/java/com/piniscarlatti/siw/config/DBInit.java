@@ -29,6 +29,5 @@ public class DBInit implements CommandLineRunner {
         */
 
         // Create funz
-
     }
 }

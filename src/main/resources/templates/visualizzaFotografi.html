@@ -25,7 +25,7 @@
 <div class="container my-5" th:switch="${fotografi}">
     <!-- Search form -->
 
-    <form action="/photographers/{value}" method="get" class="form-inline">
+    <form th:action="@{/photographers/{value}}" method="get" class="form-inline">
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 w-55" type="text" placeholder="Search" name="value"
                aria-label="Search">
@@ -57,6 +57,7 @@
             <a href="/logout" method="POST" class="btn btn-default filter-button">Logout </a>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

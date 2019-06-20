@@ -21,6 +21,11 @@
         <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
     </div>
 <div class="container my-5" th:switch="${albums}">
+    <form th:action="@{/photographers/{idF}/album/{value}(idF=${fotografo.id})}" method="get" class="form-inline">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm ml-3 w-55" type="text" placeholder="Search" name="value"
+               aria-label="Search">
+    </form>
     <div class="row">
         <div class="col-md-6">
             <div th:case="*">
@@ -46,6 +51,7 @@
             <p class="my-5"><a th:href="@{/photographers/{id}/album/add/(id=${fotografo.id})}" class="btn btn-default filter-button">Aggiungi album</a></p>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

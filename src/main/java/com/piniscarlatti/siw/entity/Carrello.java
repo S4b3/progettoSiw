@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Entity
 @Data
 public class Carrello {
@@ -30,4 +31,5 @@ public class Carrello {
     public void setFotografia(Foto foto){
         this.fotografie.add(foto);
     }
+
 }

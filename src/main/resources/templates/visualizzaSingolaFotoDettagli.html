@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Users</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <style>
-        .dettagliFoto{
-            height: 90px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <h1 align="center" class="gallery-title">Gallery</h1>
-        <div align="center">
-            <a class="btn btn-default filter-button"  th:href="@{/home}">Home</a>
-            <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
-            <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
-            <a class="btn btn-default filter-button"  th:href="@{/funzionario}">Funzionario</a>
-        </div>
-        <a class="btn btn-default filter-button"  sec:authorize="hasAuthority('ROLE_FUNZIONARIO')" th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}">Aggiungi Foto</a>
-        <br/>
-            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-                <img alt="Image"
-                         th:src="${fotografia.url}" width="800" height="800"></a>
-                <div class="dettagliFoto">
-                    <p>Nome : </p><span th:text="${fotografia.nome}"/>
-                    <p>Album : </p><span th:text= "${fotografia.album.nome} "></span>
-                    <p> Prezzo : </p><span th:text="${fotografia.prezzo}"/>
-                    <a th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}"> compra </a>
-                </div>
-            </div>
+    <h1 align="center" class="gallery-title">Pini scarlatti</h1>
+    <div align="center">
+        <a class="btn btn-default filter-button"  th:href="@{/home}">Home</a>
+        <a class="btn btn-default filter-button"  th:href="@{/gallery}">Gallery</a>
+        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Fotografi</a>
+        <a class="btn btn-default filter-button"  th:href="@{/carrello}">Carrello</a>
+        <a class="btn btn-default filter-button"  th:href="@{/photographers}">Funzionario</a>
     </div>
+
+    <div class="container my-5">
+        <div class="col-md-6">
+            <table class="table table-striped table-responsive-md" >
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Album</th>
+                    <th>Prezzo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${fotografia.nome}"></td>
+                    <td th:text="${fotografia.album.nome}"></td>
+                    <td th:text="${fotografia.prezzo}"></td>
+                </tr>
+                <br>
+                <form>
+                    <a class="btn btn-default filter-button" th:href="@{/gallery/photo/buy/{idPhoto}(idPhoto=${fotografia.id})}">Acquista</a>
+                </form>
+                </tbody>
+            </table>
+            <a><img alt="Image" th:src="${fotografia.url}" width="800" height="800"></a>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

@@ -10,6 +10,7 @@ public interface AlbumService {
     List<Album> getAllAlbum();
     Album getAlbumById(Long id);
     List<Album> getAlbumsByFotografo(Fotografo fotografo);
+    List<Album> getAlbumsByTitolo(Fotografo fotografo,String nome);
     void save(Album album);
     void setFotografoAndSaveAlbum(Album album,Fotografo fotografo);
     void delete(Album album);
