@@ -4,6 +4,9 @@ import com.piniscarlatti.siw.entity.Funzionario;
 import com.piniscarlatti.siw.repository.FotografoRepository;
 import com.piniscarlatti.siw.repository.FunzionarioRepository;
 import com.piniscarlatti.siw.service.CarrelloServiceImpl;
+import com.piniscarlatti.siw.service.FotografoService;
+import com.piniscarlatti.siw.service.FotografoServiceImpl;
+import com.piniscarlatti.siw.service.FunzionarioServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +24,7 @@ import java.security.Principal;
 @AllArgsConstructor
 public class ProjectController {
 
-    private FotografoRepository fotografoRepository;
+    private FunzionarioServiceImpl funzionarioService;
     private FunzionarioRepository fr;
     private PasswordEncoder pwd;
     private CarrelloServiceImpl carrelloService;
@@ -34,6 +37,7 @@ public class ProjectController {
     @GetMapping("/carrello")
     public String Carrello(Model model){
         model.addAttribute("fotografie",carrelloService.tutteLeFoto());
+        model.addAttribute("carrello",funzionarioService.funzionarioCorrente().getCarrello());
         return "carrello";
     }
 

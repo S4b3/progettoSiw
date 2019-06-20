@@ -69,7 +69,7 @@ public class GalleryController implements WebMvcConfigurer {
     public String addFotoToOrdine(@PathVariable("idPhoto")Long id){
         Funzionario funz = funzionarioService.funzionarioCorrente();
         Long idCarrello = funz.getCarrello().getId();
-        if(carrelloService.esisteFotoNelCarrello(idCarrello,fotoService.perId(id))) {
+        if(!carrelloService.esisteFotoNelCarrello(idCarrello,fotoService.perId(id))) {
            carrelloService.salvaFotoNelCarrello(id,idCarrello);
         }
         return "redirect:/gallery";
