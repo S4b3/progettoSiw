@@ -28,5 +28,9 @@ public class OrdiniService {
         return o.getFotografie();
     }
 
+    public void salva(Ordine o){
+        this.ordiniRepository.save(o);
+    }
+
 
 }

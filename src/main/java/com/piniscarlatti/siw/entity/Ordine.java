@@ -16,7 +16,12 @@ public class Ordine {
     private Long id;
     @OneToOne
     private OrdineDettagli dettagli;
-    private int prezzo;
+    private double prezzo;
 
+    public Ordine(OrdineDettagli odett, double prezzo, List<Foto> fotografie){
+        this.dettagli = odett;
+        this.prezzo = prezzo;
+        this.fotografie = fotografie;
+    }
 
 }

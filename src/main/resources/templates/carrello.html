@@ -7,6 +7,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        .carrelloDetails{
+            display:flex;
+            flex-direction: row;
+            margin-inline: 3%;
+        }
+        .elementoCDetails{
+            display:flex;
+            flex-direction: row;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -24,12 +35,41 @@
                 <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
                     <a th:href="@{/gallery/photo/{idPhoto}(idPhoto=${fotografia.id})}"><!--poi andrà l'indirizzo giusto-->
                         <img alt="Image"
-                             th:src="${fotografia.url}" width="365" height="365"></a>
+                             th:src="${fotografia.url}" width="200" height="200"></a>
+                    <p>Nome : </p><span th:text="${fotografia.nome}"></span>
+                    <p>Prezzo : <p><span th:text="${fotografia.prezzo}"/></p>
                 </div>
             </ul>
         </il>
 
     </div>
+    <div class="carrelloDetails">
+        <div class="elementoCDetails">
+            <p>Prezzo : <p th:text="${totale}"></p><p>€</p></p>
+        </div>
+    </div>
+        <form class="form-horizontal" action="#" th:action="@{/orderConfirm/{idCarrello}(idCarrello=${carrello.id})}" th:method="POST" th:object="${dettagliOrdine}"
+              method="post">
+            <fieldset>
+                <h1 align="center" >Dettagli Ordine</h1>
+                <div class="form-group">
+
+                    <label class="col-md-4 control-label" >Email</label>
+                    <div class="col-md-4">
+                        <input name="textinput" type="email" placeholder="example@example.it" class="form-control input-md" required=""  th:field="*{email} "  >
+                        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                    </div>
+                </div>
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" ></label>
+                    <div class="col-md-8">
+                        <input type="submit" id="button1id" name="button1id" value="conferma" class="btn btn-default filter-button">
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
 </div>
 </body>
 </html>

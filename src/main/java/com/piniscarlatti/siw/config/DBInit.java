@@ -21,13 +21,17 @@ public class DBInit implements CommandLineRunner {
     @Override
     public void run(String... args) {
         // Delete all
-        /*
+/*
         Carrello carrello = new Carrello();
         this.carrelloRepository.save(carrello);
         Funzionario funz = new Funzionario("funzionario",passwordEncoder.encode("password"),carrello);
         this.funzionarioRepository.save(funz);
-        */
 
+        Carrello carrello1 = new Carrello();
+        this.carrelloRepository.save(carrello1);
+        Funzionario utente = new Funzionario("utente", passwordEncoder.encode("password"), "UTENTE", carrello1);
+        this.funzionarioRepository.save(utente);
+*/
         // Create funz
     }
 }

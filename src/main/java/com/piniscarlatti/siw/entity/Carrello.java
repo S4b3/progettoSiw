@@ -32,4 +32,5 @@ public class Carrello {
         this.fotografie.add(foto);
     }
 
+
 }
